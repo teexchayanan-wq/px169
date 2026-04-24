@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Generator Pro</title>
+
+<!-- QR -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<!-- ZIP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<style>
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#ecfdf5,#d1fae5);
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  color: #16a34a;
+}
+
+.topbar {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input[type="file"] {
+  margin: 10px 0;
+}
+
+button {
+  background: linear-gradient(135deg,#22c55e,#16a34a);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  margin: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.status {
+  margin-top: 10px;
+  color: #555;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(230px,1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  text-align: center;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.filename {
+  font-size: 13px;
+  color: #666;
+  margin-top: 8px;
+}
+
+.qrbox {
+  margin-top: 10px;
+}
+
+.download-btn {
+  margin-top: 10px;
+  background: #16a34a;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🚀 QR Generator</h1>
+
+<div class="topbar">
+  <input type="file" id="fileInput" multiple accept="image/*"><br>
+  <button onclick="upload()">สร้าง QR</button>
+  <button onclick="downloadAll()">ดาวน์โหลดทั้งหมด (ZIP)</button>
+  <div class="status" id="status"></div>
+</div>
+
+<div class="grid" id="qrcode"></div>
+
+</div>
+
+<script>
+const API_KEY = "a56a16f08c5437dfae1e56ee20d80eea";
+
+let files = [];
+let fileNames = [];
+
+document.getElementById("fileInput").onchange = (e)=>{
+  files = [...e.target.files];
+};
+
+async function upload(){
+
+  const qrDiv = document.getElementById("qrcode");
+  const status = document.getElementById("status");
+
+  if(files.length===0){
+    alert("เลือกรูปก่อน");
+    return;
+  }
+
+  qrDiv.innerHTML = "";
+  fileNames = [];
+
+  status.innerText = "กำลังสร้าง QR...";
+
+  for(let i=0;i<files.length;i++){
+
+    try{
+      const fd = new FormData();
+      fd.append("image", files[i]);
+
+      const res = await fetch(
+        "https://api.imgbb.com/1/upload?key="+API_KEY,
+        { method:"POST", body:fd }
+      );
+
+      const data = await res.json();
+
+      if(!data.success){
+        status.innerText = "อัปโหลดไม่สำเร็จ";
+        continue;
+      }
+
+      fileNames.push(files[i].name);
+
+      const card = document.createElement("div");
+      card.className = "card";
+
+      // preview
+      const img = document.createElement("img");
+      const reader = new FileReader();
+      reader.onload = e => img.src = e.target.result;
+      reader.readAsDataURL(files[i]);
+
+      // QR
+      const qrBox = document.createElement("div");
+      qrBox.className = "qrbox";
+
+      new QRCode(qrBox,{
+        text: data.data.url,
+        width: 180,
+        height: 180
+      });
+
+      // filename
+      const name = document.createElement("div");
+      name.className = "filename";
+      name.innerText = files[i].name;
+
+      // download single
+      const btn = document.createElement("button");
+      btn.className = "download-btn";
+      btn.innerText = "ดาวน์โหลด QR";
+      btn.onclick = ()=>{
+        const canvas = qrBox.querySelector("canvas");
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL();
+        link.download = files[i].name.replace(/\.[^/.]+$/, "") + "_QR.png";
+        link.click();
+      };
+
+      card.appendChild(img);
+      card.appendChild(qrBox);
+      card.appendChild(name);
+      card.appendChild(btn);
+
+      qrDiv.appendChild(card);
+
+    }catch(err){
+      console.error(err);
+      status.innerText = "เกิด error";
+    }
+  }
+
+  status.innerText = "เสร็จแล้ว 🎉";
+}
+
+// 🔥 ZIP download (ชื่อไฟล์เดิม)
+function downloadAll(){
+
+  const canvases = document.querySelectorAll(".qrbox canvas");
+
+  if(canvases.length === 0){
+    alert("ยังไม่มี QR");
+    return;
+  }
+
+  const zip = new JSZip();
+
+  canvases.forEach((canvas, i)=>{
+
+    let name = fileNames[i] || ("QR_"+(i+1));
+    name = name.replace(/\.[^/.]+$/, "");
+
+    const base64 = canvas.toDataURL("image/png").split(",")[1];
+
+    zip.file(name + "_QR.png", base64, {base64:true});
+  });
+
+  zip.generateAsync({type:"blob"}).then(content=>{
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(content);
+    link.download = "QR_CODES.zip";
+    link.click();
+  });
+}
+</script>
+
+</body>
+</html>
