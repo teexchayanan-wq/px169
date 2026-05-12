@@ -5,15 +5,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>ระบบเบิกอาหาร</title>
+<title>ระบบPx หน่วยฝึกทหารใหม่ปตอ.๒พัน.๑</title>
 
-<!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Tom Select -->
 <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
 
-<!-- SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
@@ -50,7 +46,7 @@ body{
 
 .title{
 
-    font-size:32px;
+    font-size:30px;
 
     font-weight:700;
 
@@ -76,18 +72,6 @@ body{
     padding:14px;
 
     font-size:15px;
-
-    box-shadow:none;
-
-}
-
-.form-control:focus,
-.form-select:focus{
-
-    border-color:#2563eb;
-
-    box-shadow:
-    0 0 0 4px rgba(37,99,235,.12);
 
 }
 
@@ -128,22 +112,485 @@ body{
 
 }
 
-.btn-create{
+.btn-sheet{
 
-    background:
-    linear-gradient(
-        135deg,
-        #111827,
-        #374151
-    );
+    background:#0f766e;
 
     color:white;
 
 }
 
-.btn-main:hover{
+.btn-sheet:hover{
 
-    transform:translateY(-2px);
+    background:#115e59;
+
+    color:white;
+
+}
+
+.btn-clear{
+
+    background:#64748b;
+
+    color:white;
+
+}
+
+.btn-clear:hover{
+
+    background:#475569;
+
+    color:white;
+
+}
+
+.action-buttons{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+
+}
+
+.summary-grid{
+
+    display:grid;
+
+    gap:10px;
+
+    margin-top:10px;
+
+}
+
+.summary-row{
+
+    display:grid;
+
+    grid-template-columns:1fr auto 1fr;
+
+    gap:10px;
+
+    align-items:center;
+
+    padding:12px;
+
+    border-radius:14px;
+
+    background:#f8fafc;
+
+}
+
+.summary-label{
+
+    font-weight:800;
+
+    color:#334155;
+
+}
+
+.summary-value{
+
+    border-radius:12px;
+
+    padding:8px 10px;
+
+    font-weight:800;
+
+    text-align:center;
+
+    background:#e0f2fe;
+
+    color:#075985;
+
+}
+
+.summary-arrow{
+
+    font-weight:900;
+
+    color:#64748b;
+
+}
+
+.code-picker-btn{
+
+    width:100%;
+
+    border:1px solid #bfdbfe;
+
+    border-radius:18px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #eff6ff,
+        #ecfeff
+    );
+
+    color:#1e3a5f;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    padding:15px;
+
+    text-align:left;
+
+}
+
+.code-picker-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(96px,1fr));
+
+    gap:10px;
+
+    max-height:520px;
+
+    overflow:auto;
+
+    padding:4px;
+
+}
+
+.code-choice{
+
+    border:none;
+
+    border-radius:16px;
+
+    padding:14px 16px;
+
+    text-align:center;
+
+    font-weight:800;
+
+    color:#0f172a;
+
+    background:#dbeafe;
+
+    box-shadow:
+    0 8px 18px rgba(15,23,42,.08);
+
+}
+
+.code-choice.code-a{
+
+    background:#fecaca;
+
+    color:#7f1d1d;
+
+}
+
+.code-choice.code-b{
+
+    background:#fef08a;
+
+    color:#713f12;
+
+}
+
+.code-choice.code-c{
+
+    background:#fbcfe8;
+
+    color:#831843;
+
+}
+
+.code-choice:hover{
+
+    transform:translateY(-1px);
+
+    filter:saturate(1.1);
+
+}
+
+.status-online{
+
+    background:#16a34a !important;
+
+    color:white;
+
+}
+
+.status-offline{
+
+    background:#dc2626 !important;
+
+    color:white;
+
+}
+
+.status-loading{
+
+    background:#6b7280 !important;
+
+    color:white;
+
+}
+
+.sheet-status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    border:none;
+
+    border-radius:999px;
+
+    padding:9px 12px;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+}
+
+.sheet-status-dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#f59e0b;
+
+}
+
+.current-box{
+
+    background:#eff6ff;
+
+    border:2px solid #bfdbfe;
+
+    border-radius:16px;
+
+    padding:14px;
+
+    text-align:center;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:#1d4ed8;
+
+}
+
+.current-actions{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+
+    align-items:end;
+
+}
+
+.current-actions .form-label{
+
+    margin-bottom:8px;
+
+}
+
+.quick-actions{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:8px;
+
+    margin-top:10px;
+
+}
+
+.quick-btn{
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:10px;
+
+    font-size:14px;
+
+    font-weight:900;
+
+    color:white;
+
+}
+
+.quick-plus{
+
+    background:#16a34a;
+
+}
+
+.quick-minus{
+
+    background:#dc2626;
+
+}
+
+.plus-text{
+
+    text-align:center;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    margin:10px 0;
+
+    color:#6b7280;
+
+}
+
+.item-card{
+
+    border-radius:20px;
+
+}
+
+.log-table{
+
+    max-height:350px;
+
+    overflow:auto;
+
+    border-radius:18px;
+
+    border:1px solid #e5e7eb;
+
+}
+
+.log-title{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    margin-bottom:14px;
+
+}
+
+.log-title h4{
+
+    margin:0;
+
+    font-weight:900;
+
+    color:#0f172a;
+
+}
+
+.log-badge{
+
+    border-radius:999px;
+
+    padding:6px 10px;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    background:#ecfeff;
+
+    color:#0e7490;
+
+}
+
+.log-row-up{
+
+    background:#f0fdf4;
+
+}
+
+.log-row-down{
+
+    background:#fef2f2;
+
+}
+
+.log-code{
+
+    font-weight:900;
+
+    color:#2563eb;
+
+}
+
+.log-field{
+
+    display:inline-block;
+
+    border-radius:999px;
+
+    padding:5px 9px;
+
+    font-weight:800;
+
+    background:#e0f2fe;
+
+    color:#075985;
+
+}
+
+.log-change{
+
+    display:inline-block;
+
+    border-radius:999px;
+
+    padding:5px 9px;
+
+    font-size:12px;
+
+    font-weight:900;
+
+}
+
+.log-change-up{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+.log-change-down{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+
+.log-value{
+
+    font-weight:800;
+
+    color:#334155;
 
 }
 
@@ -177,69 +624,407 @@ body{
 
 }
 
-.table tbody tr:nth-child(even){
+.floating-latest{
 
-    background:#f8fafc;
+    position:fixed;
+
+    top:20px;
+
+    left:20px;
+
+    width:320px;
+
+    z-index:9999;
 
 }
 
-.table tbody tr:hover{
+.floating-card{
 
-    background:#e8f0ff;
+    background:
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #f8fafc
+    );
 
-}
+    border-radius:22px;
 
-.log-table{
+    padding:18px;
 
-    max-height:350px;
-
-    overflow:auto;
-
-    border-radius:18px;
+    box-shadow:
+    0 10px 35px rgba(0,0,0,.12);
 
     border:1px solid #e5e7eb;
 
 }
 
-.current-box{
+.latest-title{
 
-    background:#eff6ff;
+    display:flex;
 
-    border:2px solid #bfdbfe;
+    align-items:center;
 
-    border-radius:16px;
+    justify-content:space-between;
 
-    padding:14px;
+    gap:10px;
 
-    text-align:center;
+    margin-bottom:14px;
 
-    font-size:22px;
+}
 
-    font-weight:700;
+.latest-title h5{
+
+    margin:0;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    color:#0f172a;
+
+}
+
+.latest-badge{
+
+    border-radius:999px;
+
+    padding:6px 10px;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    background:#dbeafe;
 
     color:#1d4ed8;
 
 }
 
-.plus-text{
+.latest-item{
 
-    font-size:24px;
+    position:relative;
+
+    overflow:hidden;
+
+    background:#ffffff;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:14px;
+
+    padding:12px 12px 12px 16px;
+
+    margin-bottom:10px;
+
+    box-shadow:
+    0 8px 18px rgba(15,23,42,.06);
+
+}
+
+.latest-item::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    bottom:0;
+
+    width:5px;
+
+    background:#3b82f6;
+
+}
+
+.latest-item.latest-up::before{
+
+    background:#16a34a;
+
+}
+
+.latest-item.latest-down::before{
+
+    background:#dc2626;
+
+}
+
+.latest-code{
+
+    font-size:16px;
 
     font-weight:700;
 
-    color:#6b7280;
+    color:#2563eb;
+
+}
+
+.latest-head{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:6px;
+
+}
+
+.latest-change{
+
+    border-radius:999px;
+
+    padding:4px 8px;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    background:#e0f2fe;
+
+    color:#075985;
+
+}
+
+.latest-up .latest-change{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+.latest-down .latest-change{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+
+.latest-detail{
+
+    display:grid;
+
+    grid-template-columns:1fr auto 1fr;
+
+    gap:8px;
+
+    align-items:center;
+
+    font-size:13px;
+
+    color:#374151;
+
+}
+
+.latest-value{
+
+    border-radius:10px;
+
+    padding:6px 8px;
 
     text-align:center;
 
-    margin:10px 0;
+    font-weight:800;
+
+    background:#f1f5f9;
+
+    color:#334155;
+
+}
+
+.latest-arrow{
+
+    font-weight:900;
+
+    color:#64748b;
+
+}
+
+.latest-time{
+
+    font-size:12px;
+
+    color:#6b7280;
+
+    margin-top:6px;
 
 }
 
 @media(max-width:768px){
 
+    body{
+
+        background:#eef2f7;
+
+    }
+
+    .container{
+
+        padding-left:12px;
+
+        padding-right:12px;
+
+    }
+
+    .card{
+
+        border-radius:20px;
+
+        padding:18px !important;
+
+    }
+
     .title{
 
-        font-size:26px;
+        font-size:24px;
+
+    }
+
+    .d-flex.justify-content-between{
+
+        align-items:flex-start !important;
+
+        flex-direction:column;
+
+        gap:12px;
+
+    }
+
+    .sheet-status{
+
+        width:100%;
+
+        justify-content:center;
+
+        border-radius:16px;
+
+    }
+
+    .floating-latest{
+
+        position:relative;
+
+        width:100%;
+
+        left:auto;
+
+        top:auto;
+
+        margin-bottom:20px;
+
+    }
+
+    .item-card{
+
+        background:#ffffff;
+
+        border:1px solid #e5e7eb;
+
+        border-radius:20px;
+
+        padding:16px;
+
+        box-shadow:
+        0 8px 20px rgba(15,23,42,.07);
+
+    }
+
+    .item-card .form-label{
+
+        font-size:16px;
+
+    }
+
+    .current-actions{
+
+        grid-template-columns:1fr;
+
+        gap:10px;
+
+    }
+
+    .current-box{
+
+        padding:18px;
+
+        font-size:30px;
+
+    }
+
+    .form-control,
+    .form-select,
+    .code-picker-btn{
+
+        min-height:54px;
+
+        font-size:16px;
+
+    }
+
+    .quick-actions{
+
+        grid-template-columns:1fr 1fr;
+
+        gap:10px;
+
+    }
+
+    .quick-btn{
+
+        min-height:52px;
+
+        font-size:18px;
+
+        border-radius:16px;
+
+    }
+
+    .action-buttons{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .btn-main{
+
+        min-height:54px;
+
+    }
+
+    .code-picker-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        max-height:65vh;
+
+    }
+
+    .code-choice{
+
+        min-height:54px;
+
+        font-size:16px;
+
+    }
+
+    .latest-detail{
+
+        grid-template-columns:1fr;
+
+        gap:6px;
+
+    }
+
+    .latest-arrow{
+
+        text-align:center;
 
     }
 
@@ -250,33 +1035,76 @@ body{
 </head>
 <body>
 
+<!-- ล่าสุด -->
+
+<div class="floating-latest">
+
+<div class="floating-card">
+
+<div class="latest-title">
+
+<h5>
+บันทึกล่าสุด
+</h5>
+
+<span class="latest-badge">
+ล่าสุด 3 รายการ
+</span>
+
+</div>
+
+<div id="latestSaveBox">
+
+<div class="text-muted">
+
+ยังไม่มีข้อมูล
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 <div class="container py-4">
 
 <div class="row justify-content-center">
 
-<div class="col-lg-9">
+<div class="col-lg-8">
 
-<!-- =========================
-     FORM
-========================= -->
+<!-- FORM -->
 
 <div class="card p-4 mb-4">
 
-<h2 class="text-center mb-4 title">
-ระบบเบิกอาหาร
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+<h2 class="title m-0">
+ระบบPx หน่วยฝึกทหารใหม่ปตอ.๒พัน.๑
 </h2>
 
-<!-- CREATE SHEET -->
-
 <button
-class="btn btn-main btn-create w-100 mb-4"
-onclick="createSheet()">
+type="button"
+id="sheetStatus"
+class="sheet-status"
+onclick="showSheetInfo()">
 
-สร้างชีตใหม่ประจำวัน
+<span class="sheet-status-dot"></span>
+<span id="sheetStatusText">กำลังตรวจสอบ Sheet...</span>
 
 </button>
 
-<!-- CODE -->
+<div
+id="connectionStatus"
+class="badge rounded-pill px-3 py-2 fs-6 status-loading">
+
+กำลังตรวจสอบ...
+
+</div>
+
+</div>
+
+<!-- SELECT -->
 
 <div class="mb-4">
 
@@ -284,7 +1112,17 @@ onclick="createSheet()">
 เลือกรหัส
 </label>
 
-<select id="codeSelect" class="form-select">
+<button
+type="button"
+id="codePopupButton"
+class="code-picker-btn"
+onclick="openCodePopup()">
+
+กดเพื่อเลือกรหัส
+
+</button>
+
+<select id="codeSelect" class="form-select d-none">
 
 <option value="">
 เลือกรหัส
@@ -374,27 +1212,37 @@ readonly>
 
 </div>
 
-<!-- =========================
-     FOOD SECTION
-========================= -->
+<!-- ITEMS -->
 
 <div class="row">
 
 <!-- WATER -->
 
-<div class="col-md-4 mb-4">
+<div class="col-md-4 mb-4 item-card">
 
 <label class="form-label">
 น้ำ (ปัจจุบัน)
 </label>
 
+<div class="current-actions">
+
 <div class="current-box" id="waterCurrent">
 0
 </div>
 
-<div class="plus-text">
-+
+<div>
+
+<label class="form-label text-danger">
+ลด
+</label>
+
+<select id="waterMinus" class="form-select"></select>
+
 </div>
+
+</div>
+
+<div class="plus-text">+</div>
 
 <label class="form-label">
 เพิ่ม
@@ -402,23 +1250,53 @@ readonly>
 
 <select id="waterAdd" class="form-select"></select>
 
+<div class="quick-actions">
+
+<button
+type="button"
+class="quick-btn quick-minus"
+onclick="adjustSelect('waterMinus', 1)">
+-1
+</button>
+
+<button
+type="button"
+class="quick-btn quick-plus"
+onclick="adjustSelect('waterAdd', 1)">
++1
+</button>
+
+</div>
+
 </div>
 
 <!-- SNACK -->
 
-<div class="col-md-4 mb-4">
+<div class="col-md-4 mb-4 item-card">
 
 <label class="form-label">
 ขนม (ปัจจุบัน)
 </label>
 
+<div class="current-actions">
+
 <div class="current-box" id="snackCurrent">
 0
 </div>
 
-<div class="plus-text">
-+
+<div>
+
+<label class="form-label text-danger">
+ลด
+</label>
+
+<select id="snackMinus" class="form-select"></select>
+
 </div>
+
+</div>
+
+<div class="plus-text">+</div>
 
 <label class="form-label">
 เพิ่ม
@@ -426,23 +1304,53 @@ readonly>
 
 <select id="snackAdd" class="form-select"></select>
 
+<div class="quick-actions">
+
+<button
+type="button"
+class="quick-btn quick-minus"
+onclick="adjustSelect('snackMinus', 1)">
+-1
+</button>
+
+<button
+type="button"
+class="quick-btn quick-plus"
+onclick="adjustSelect('snackAdd', 1)">
++1
+</button>
+
+</div>
+
 </div>
 
 <!-- FRIED -->
 
-<div class="col-md-4 mb-4">
+<div class="col-md-4 mb-4 item-card">
 
 <label class="form-label">
 ของทอด (ปัจจุบัน)
 </label>
 
+<div class="current-actions">
+
 <div class="current-box" id="friedCurrent">
 0
 </div>
 
-<div class="plus-text">
-+
+<div>
+
+<label class="form-label text-danger">
+ลด
+</label>
+
+<select id="friedMinus" class="form-select"></select>
+
 </div>
+
+</div>
+
+<div class="plus-text">+</div>
 
 <label class="form-label">
 เพิ่ม
@@ -450,12 +1358,40 @@ readonly>
 
 <select id="friedAdd" class="form-select"></select>
 
-</div>
-
-</div>
+<div class="quick-actions">
 
 <button
-class="btn btn-main btn-save w-100"
+type="button"
+class="quick-btn quick-minus"
+onclick="adjustSelect('friedMinus', 1)">
+-1
+</button>
+
+<button
+type="button"
+class="quick-btn quick-plus"
+onclick="adjustSelect('friedAdd', 1)">
++1
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="action-buttons">
+
+<button
+class="btn btn-main btn-clear"
+onclick="clearForm()">
+
+ล้างฟอร์ม
+
+</button>
+
+<button
+class="btn btn-main btn-save"
 onclick="saveData()">
 
 บันทึกข้อมูล
@@ -464,15 +1400,31 @@ onclick="saveData()">
 
 </div>
 
-<!-- =========================
-     LOG
-========================= -->
+<button
+class="btn btn-main btn-sheet w-100 mt-3"
+onclick="createDailySheet()">
+
+สร้าง Sheet เบิกแต่ละวัน
+
+</button>
+
+</div>
+
+<!-- LOG -->
 
 <div class="card p-4">
 
-<h4 class="mb-3">
+<div class="log-title">
+
+<h4>
 ประวัติการแก้ไข
 </h4>
+
+<span class="log-badge">
+รายการย้อนหลัง
+</span>
+
+</div>
 
 <div class="log-table">
 
@@ -518,33 +1470,34 @@ onclick="saveData()">
 
 </div>
 
-<!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
 
 <script>
 
-/* =========================
-   API URL
-========================= */
-
 const API_URL =
 "https://script.google.com/macros/s/AKfycbyGBiG-ULn68Naj4wy6UXif7qhHuxOu_g4ey-P7sCJIbG3j8ubjz-VjFjXaIYBl3yemQg/exec";
 
-/* =========================
-   START
-========================= */
+let currentSheetName = "กำลังตรวจสอบ...";
+
+let codeList = [];
+
+/* START */
 
 window.onload = () => {
 
     createNumberOptions();
 
+    checkConnection();
+
+    loadSheetInfo();
+
     loadCodes();
+
+    loadLatest();
 
 };
 
-/* =========================
-   CREATE OPTIONS
-========================= */
+/* OPTIONS */
 
 function createNumberOptions(){
 
@@ -552,7 +1505,11 @@ function createNumberOptions(){
 
         "waterAdd",
         "snackAdd",
-        "friedAdd"
+        "friedAdd",
+
+        "waterMinus",
+        "snackMinus",
+        "friedMinus"
 
     ];
 
@@ -568,8 +1525,7 @@ function createNumberOptions(){
 
             option.value = i;
 
-            option.textContent =
-            "+" + i;
+            option.textContent = i;
 
             select.appendChild(option);
 
@@ -579,161 +1535,371 @@ function createNumberOptions(){
 
 }
 
-/* =========================
-   LOAD CODES
-========================= */
+function adjustSelect(id, amount){
 
-async function loadCodes(){
+    const select =
+    document.getElementById(id);
+
+    const current =
+    parseInt(select.value) || 0;
+
+    const next =
+    Math.min(50, current + amount);
+
+    select.value =
+    next;
+
+}
+
+function showSheetInfo(){
+
+    Swal.fire({
+
+        icon:'info',
+
+        title:'Sheet ที่เชื่อมอยู่',
+
+        html:`
+
+        <div class="summary-grid">
+            <div class="summary-row">
+                <div class="summary-label">ชื่อ Sheet</div>
+                <div class="summary-arrow">:</div>
+                <div class="summary-value">${currentSheetName}</div>
+            </div>
+        </div>
+
+        `,
+
+        confirmButtonText:'ปิด'
+
+    });
+
+}
+
+async function loadSheetInfo(){
+
+    const text =
+    document.getElementById("sheetStatusText");
 
     try{
 
         const res =
-        await fetch(API_URL + "?action=codes");
+        await fetch(API_URL + "?action=sheetInfo");
 
         const data =
         await res.json();
 
-        const select =
-        document.getElementById("codeSelect");
+        if(data.success && data.sheetName){
 
-        data.forEach(item => {
+            currentSheetName =
+            data.sheetName;
 
-            const option =
-            document.createElement("option");
+            text.innerText =
+            "Sheet: " + data.sheetName;
 
-            option.value =
-            item.code;
+        }else{
 
-            option.textContent =
-            item.code;
+            currentSheetName =
+            data.sheetName || "ไม่พบชื่อ Sheet";
 
-            select.appendChild(option);
+            text.innerText =
+            "Sheet: " + currentSheetName;
 
-        });
-
-        const ts =
-        new TomSelect("#codeSelect",{
-
-            create:false,
-
-            sortField:{
-                field:"text",
-                direction:"asc"
-            }
-
-        });
-
-        ts.on("change", function(value){
-
-            loadData(value);
-
-        });
+        }
 
     }catch(err){
 
-        Swal.fire({
+        currentSheetName =
+        "ดึงชื่อ Sheet ไม่สำเร็จ";
 
-            icon:'error',
-
-            title:'โหลดรหัสไม่สำเร็จ'
-
-        });
+        text.innerText =
+        currentSheetName;
 
     }
 
 }
 
-/* =========================
-   LOAD DATA
-========================= */
+/* CONNECTION */
+
+async function checkConnection(){
+
+    const status =
+    document.getElementById("connectionStatus");
+
+    try{
+
+        status.className =
+        "badge rounded-pill px-3 py-2 fs-6 status-loading";
+
+        status.innerHTML =
+        "กำลังตรวจสอบ...";
+
+        const res =
+        await fetch(API_URL + "?action=codes");
+
+        await res.json();
+
+        status.className =
+        "badge rounded-pill px-3 py-2 fs-6 status-online";
+
+        status.innerHTML =
+        "🟢 ออนไลน์";
+
+    }catch(err){
+
+        status.className =
+        "badge rounded-pill px-3 py-2 fs-6 status-offline";
+
+        status.innerHTML =
+        "🔴 ออฟไลน์";
+
+    }
+
+}
+
+/* LOAD CODES */
+
+async function loadCodes(){
+
+    const res =
+    await fetch(API_URL + "?action=codes");
+
+    const data =
+    await res.json();
+
+    const select =
+    document.getElementById("codeSelect");
+
+    codeList = data.map(item => item.code);
+
+    data.forEach(item => {
+
+        const option =
+        document.createElement("option");
+
+        option.value =
+        item.code;
+
+        option.textContent =
+        item.code;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+/* CODE POPUP */
+
+async function openCodePopup(){
+
+    if(codeList.length === 0){
+
+        Swal.fire({
+
+            icon:'info',
+
+            title:'ยังไม่มีรหัสให้เลือก'
+
+        });
+
+        return;
+
+    }
+
+    await Swal.fire({
+
+        title:'เลือกรหัส',
+
+        html:`
+
+        <input
+        id="codeSearch"
+        class="form-control mb-3"
+        placeholder="ค้นหารหัส...">
+
+        <div
+        id="codePopupList"
+        class="code-picker-grid">
+        </div>
+
+        `,
+
+        width:'min(760px, 95vw)',
+
+        showConfirmButton:false,
+
+        showCloseButton:true,
+
+        didOpen:() => {
+
+            const search =
+            document.getElementById("codeSearch");
+
+            const list =
+            document.getElementById("codePopupList");
+
+            const renderCodes = (keyword = "") => {
+
+                const filtered =
+                codeList.filter(code =>
+                    String(code)
+                    .toLowerCase()
+                    .includes(keyword.toLowerCase())
+                );
+
+                if(filtered.length === 0){
+
+                    list.innerHTML =
+                    '<div class="text-muted text-center py-3">ไม่พบรหัส</div>';
+
+                    return;
+
+                }
+
+                list.innerHTML =
+                filtered.map(code => {
+
+                    const prefix =
+                    String(code).charAt(0).toLowerCase();
+
+                    const colorClass =
+                    ["a","b","c"].includes(prefix)
+                    ? "code-" + prefix
+                    : "";
+
+                    return `
+
+                    <button
+                    type="button"
+                    class="code-choice ${colorClass}"
+                    data-code="${code}">
+                    ${code}
+                    </button>
+
+                    `;
+
+                }).join("");
+
+            };
+
+            renderCodes();
+
+            search.addEventListener("input", () => {
+
+                renderCodes(search.value);
+
+            });
+
+            list.addEventListener("click", event => {
+
+                const button =
+                event.target.closest(".code-choice");
+
+                if(!button) return;
+
+                const code =
+                button.dataset.code;
+
+                document.getElementById("codeSelect").value =
+                code;
+
+                document.getElementById("codePopupButton").innerText =
+                "รหัส " + code;
+
+                loadData(code);
+
+                Swal.close();
+
+            });
+
+            search.focus();
+
+        }
+
+    });
+
+}
+
+/* LOAD DATA */
 
 async function loadData(code){
 
     if(!code) return;
 
+    const res =
+    await fetch(
+
+        API_URL +
+        "?action=get&code=" +
+        encodeURIComponent(code)
+
+    );
+
+    const data =
+    await res.json();
+
+    document.getElementById("row").value =
+    data.row || "";
+
+    document.getElementById("rank").value =
+    data.rank || "";
+
+    document.getElementById("firstname").value =
+    data.firstname || "";
+
+    document.getElementById("lastname").value =
+    data.lastname || "";
+
+    document.getElementById("code").value =
+    data.code || "";
+
+    document.getElementById("group").value =
+    data.group || "";
+
+    document.getElementById("waterCurrent").innerText =
+    data.water || 0;
+
+    document.getElementById("snackCurrent").innerText =
+    data.snack || 0;
+
+    document.getElementById("friedCurrent").innerText =
+    data.fried || 0;
+
+    document.getElementById("waterAdd").value = 0;
+    document.getElementById("snackAdd").value = 0;
+    document.getElementById("friedAdd").value = 0;
+
+    document.getElementById("waterMinus").value = 0;
+    document.getElementById("snackMinus").value = 0;
+    document.getElementById("friedMinus").value = 0;
+
+    loadLog(code);
+
+}
+
+/* SAVE */
+
+async function saveData(){
+
     try{
 
-        const res =
-        await fetch(
-
-            API_URL +
-            "?action=get&code=" +
-            encodeURIComponent(code)
-
-        );
-
-        const data =
-        await res.json();
-
-        if(data.error){
+        if(
+            !document.getElementById("row").value
+        ){
 
             Swal.fire({
 
-                icon:'error',
+                icon:'warning',
 
-                title:'ไม่พบข้อมูล'
+                title:'กรุณาเลือกรหัสก่อน'
 
             });
 
             return;
 
         }
-
-        document.getElementById("row").value =
-        data.row || "";
-
-        document.getElementById("rank").value =
-        data.rank || "";
-
-        document.getElementById("firstname").value =
-        data.firstname || "";
-
-        document.getElementById("lastname").value =
-        data.lastname || "";
-
-        document.getElementById("code").value =
-        data.code || "";
-
-        document.getElementById("group").value =
-        data.group || "";
-
-        document.getElementById("waterCurrent").innerText =
-        data.water || 0;
-
-        document.getElementById("snackCurrent").innerText =
-        data.snack || 0;
-
-        document.getElementById("friedCurrent").innerText =
-        data.fried || 0;
-
-        // reset add
-        document.getElementById("waterAdd").value = 0;
-        document.getElementById("snackAdd").value = 0;
-        document.getElementById("friedAdd").value = 0;
-
-        loadLog(code);
-
-    }catch(err){
-
-        Swal.fire({
-
-            icon:'error',
-
-            title:'โหลดข้อมูลไม่สำเร็จ'
-
-        });
-
-    }
-
-}
-
-/* =========================
-   SAVE DATA
-========================= */
-
-async function saveData(){
-
-    try{
 
         const waterCurrent =
         parseInt(
@@ -765,14 +1931,119 @@ async function saveData(){
         document.getElementById("friedAdd").value
         ) || 0;
 
+        const waterMinus =
+        parseInt(
+        document.getElementById("waterMinus").value
+        ) || 0;
+
+        const snackMinus =
+        parseInt(
+        document.getElementById("snackMinus").value
+        ) || 0;
+
+        const friedMinus =
+        parseInt(
+        document.getElementById("friedMinus").value
+        ) || 0;
+
         const finalWater =
-        waterCurrent + waterAdd;
+        Math.max(
+            0,
+            waterCurrent + waterAdd - waterMinus
+        );
 
         const finalSnack =
-        snackCurrent + snackAdd;
+        Math.max(
+            0,
+            snackCurrent + snackAdd - snackMinus
+        );
 
         const finalFried =
-        friedCurrent + friedAdd;
+        Math.max(
+            0,
+            friedCurrent + friedAdd - friedMinus
+        );
+
+        if(
+            finalWater === waterCurrent &&
+            finalSnack === snackCurrent &&
+            finalFried === friedCurrent
+        ){
+
+            Swal.fire({
+
+                icon:'info',
+
+                title:'ยังไม่มีรายการเปลี่ยนแปลง',
+
+                text:'กรุณาเพิ่มหรือลดอย่างน้อย 1 รายการก่อนบันทึก'
+
+            });
+
+            return;
+
+        }
+
+        const confirm =
+        await Swal.fire({
+
+            icon:'question',
+
+            title:'ยืนยันการบันทึก?',
+
+            html:`
+
+            <div class="summary-grid">
+
+                <div class="summary-row">
+                    <div>
+                        <div class="summary-label">น้ำ</div>
+                        <div class="summary-value">${waterCurrent}</div>
+                    </div>
+                    <div class="summary-arrow">→</div>
+                    <div>
+                        <div class="summary-label">หลังบันทึก</div>
+                        <div class="summary-value">${finalWater}</div>
+                    </div>
+                </div>
+
+                <div class="summary-row">
+                    <div>
+                        <div class="summary-label">ขนม</div>
+                        <div class="summary-value">${snackCurrent}</div>
+                    </div>
+                    <div class="summary-arrow">→</div>
+                    <div>
+                        <div class="summary-label">หลังบันทึก</div>
+                        <div class="summary-value">${finalSnack}</div>
+                    </div>
+                </div>
+
+                <div class="summary-row">
+                    <div>
+                        <div class="summary-label">ของทอด</div>
+                        <div class="summary-value">${friedCurrent}</div>
+                    </div>
+                    <div class="summary-arrow">→</div>
+                    <div>
+                        <div class="summary-label">หลังบันทึก</div>
+                        <div class="summary-value">${finalFried}</div>
+                    </div>
+                </div>
+
+            </div>
+
+            `,
+
+            showCancelButton:true,
+
+            confirmButtonText:'บันทึก',
+
+            cancelButtonText:'ยกเลิก'
+
+        });
+
+        if(!confirm.isConfirmed) return;
 
         Swal.fire({
 
@@ -838,15 +2109,39 @@ async function saveData(){
 
                 title:'บันทึกสำเร็จ',
 
-                timer:1500,
+                timer:1200,
 
                 showConfirmButton:false
 
             });
 
-            loadData(
+            document.getElementById("waterCurrent").innerText =
+            finalWater;
+
+            document.getElementById("snackCurrent").innerText =
+            finalSnack;
+
+            document.getElementById("friedCurrent").innerText =
+            finalFried;
+
+            document.getElementById("waterAdd").value = 0;
+            document.getElementById("snackAdd").value = 0;
+            document.getElementById("friedAdd").value = 0;
+
+            document.getElementById("waterMinus").value = 0;
+            document.getElementById("snackMinus").value = 0;
+            document.getElementById("friedMinus").value = 0;
+
+            await loadLatest();
+
+            await loadLog(
                 document.getElementById("code").value
             );
+
+            document.getElementById("codeSelect").value = "";
+
+            document.getElementById("codePopupButton").innerText =
+            "กดเพื่อเลือกรหัส";
 
         }else{
 
@@ -874,114 +2169,73 @@ async function saveData(){
 
 }
 
-/* =========================
-   LOAD LOG
-========================= */
+/* CLEAR FORM */
 
-async function loadLog(code=""){
+function clearForm(){
 
-    try{
+    document.getElementById("row").value = "";
+    document.getElementById("rank").value = "";
+    document.getElementById("firstname").value = "";
+    document.getElementById("lastname").value = "";
+    document.getElementById("code").value = "";
+    document.getElementById("group").value = "";
 
-        let url =
-        API_URL + "?action=log";
+    document.getElementById("waterCurrent").innerText = 0;
+    document.getElementById("snackCurrent").innerText = 0;
+    document.getElementById("friedCurrent").innerText = 0;
 
-        if(code){
+    document.getElementById("waterAdd").value = 0;
+    document.getElementById("snackAdd").value = 0;
+    document.getElementById("friedAdd").value = 0;
 
-            url +=
-            "&code=" +
-            encodeURIComponent(code);
+    document.getElementById("waterMinus").value = 0;
+    document.getElementById("snackMinus").value = 0;
+    document.getElementById("friedMinus").value = 0;
 
-        }
+    document.getElementById("codeSelect").value = "";
 
-        const res =
-        await fetch(url);
+    document.getElementById("codePopupButton").innerText =
+    "กดเพื่อเลือกรหัส";
 
-        const data =
-        await res.json();
-
-        let html = "";
-
-        if(data.length === 0){
-
-            html = `
-
-            <tr>
-
-            <td colspan="5" class="text-center">
-
-            ไม่มีประวัติการแก้ไข
-
-            </td>
-
-            </tr>
-
-            `;
-
-        }
-
-        data.reverse().forEach(item => {
-
-            html += `
-
-            <tr>
-
-            <td>${item.time}</td>
-            <td>${item.code}</td>
-            <td>${item.field}</td>
-            <td>${item.old}</td>
-            <td>${item.new}</td>
-
-            </tr>
-
-            `;
-
-        });
-
-        document.getElementById("logTable").innerHTML =
-        html;
-
-    }catch(err){
-
-        console.error(err);
-
-    }
+    document.getElementById("logTable").innerHTML =
+    `
+    <tr>
+        <td colspan="5" class="text-center">
+        ยังไม่มีข้อมูล
+        </td>
+    </tr>
+    `;
 
 }
 
-/* =========================
-   CREATE SHEET
-========================= */
+/* CREATE DAILY SHEET */
 
-async function createSheet(){
+async function createDailySheet(){
 
     const confirm =
     await Swal.fire({
 
-        title:'สร้างชีตใหม่ ?',
-
-        text:'ระบบจะสร้างชีตประจำวัน',
-
         icon:'question',
+
+        title:'สร้าง Sheet เบิกแต่ละวัน?',
+
+        text:'ระบบจะสร้าง Sheet ใหม่สำหรับบันทึกการเบิกของวันนี้',
 
         showCancelButton:true,
 
         confirmButtonText:'สร้าง',
 
-        cancelButtonText:'ยกเลิก',
-
-        confirmButtonColor:'#2563eb'
+        cancelButtonText:'ยกเลิก'
 
     });
 
-    if(!confirm.isConfirmed){
-        return;
-    }
+    if(!confirm.isConfirmed) return;
 
     try{
 
         Swal.fire({
 
-            title:'กำลังสร้างชีต',
+            title:'กำลังสร้าง Sheet',
 
             html:`
 
@@ -1003,24 +2257,39 @@ async function createSheet(){
         });
 
         const res =
-        await fetch(
-            API_URL + "?action=createSheet"
-        );
+        await fetch(API_URL + "?action=createDailySheet");
 
-        const data =
-        await res.json();
+        const text =
+        await res.text();
+
+        let result;
+
+        try{
+
+            result =
+            JSON.parse(text);
+
+        }catch(parseErr){
+
+            throw new Error(text || "Apps Script ไม่ได้ส่งข้อมูล JSON กลับมา");
+
+        }
 
         Swal.close();
 
-        if(data.success){
+        if(result.success){
 
             Swal.fire({
 
                 icon:'success',
 
-                title:'สร้างชีตสำเร็จ',
+                title:'สร้าง Sheet สำเร็จ',
 
-                text:data.sheetName
+                text:result.sheetName || '',
+
+                timer:1600,
+
+                showConfirmButton:false
 
             });
 
@@ -1030,9 +2299,9 @@ async function createSheet(){
 
                 icon:'error',
 
-                title:'สร้างชีตไม่สำเร็จ',
+                title:'สร้าง Sheet ไม่สำเร็จ',
 
-                text:data.message
+                text:result.message || ''
 
             });
 
@@ -1044,11 +2313,236 @@ async function createSheet(){
 
             icon:'error',
 
-            title:'เชื่อมต่อไม่สำเร็จ'
+            title:'สร้าง Sheet ไม่สำเร็จ',
+
+            text:err.message || 'เชื่อมต่อไม่สำเร็จ'
 
         });
 
     }
+
+}
+
+/* LOG */
+
+async function loadLog(code=""){
+
+    let url =
+    API_URL + "?action=log";
+
+    if(code){
+
+        url +=
+        "&code=" +
+        encodeURIComponent(code);
+
+    }
+
+    const res =
+    await fetch(url);
+
+    const data =
+    await res.json();
+
+    let html = "";
+
+    if(data.length === 0){
+
+        html = `
+
+        <tr>
+
+        <td colspan="5" class="text-center">
+
+        ไม่มีประวัติการแก้ไข
+
+        </td>
+
+        </tr>
+
+        `;
+
+    }
+
+    data.reverse().forEach(item => {
+
+        const fieldName =
+        getThaiFieldName(item.field);
+
+        const oldValue =
+        Number(item.old);
+
+        const newValue =
+        Number(item.new);
+
+        const rowClass =
+        newValue > oldValue
+        ? "log-row-up"
+        : newValue < oldValue
+        ? "log-row-down"
+        : "";
+
+        const changeClass =
+        newValue > oldValue
+        ? "log-change-up"
+        : newValue < oldValue
+        ? "log-change-down"
+        : "";
+
+        const changeText =
+        newValue > oldValue
+        ? "เพิ่ม"
+        : newValue < oldValue
+        ? "ลด"
+        : "แก้ไข";
+
+        html += `
+
+        <tr class="${rowClass}">
+
+        <td>${item.time}</td>
+        <td>
+            <span class="log-code">${item.code}</span>
+        </td>
+        <td>
+            <span class="log-field">${fieldName}</span>
+            <span class="log-change ${changeClass}">${changeText}</span>
+        </td>
+        <td>
+            <span class="log-value">${item.old}</span>
+        </td>
+        <td>
+            <span class="log-value">${item.new}</span>
+        </td>
+
+        </tr>
+
+        `;
+
+    });
+
+    document.getElementById("logTable").innerHTML =
+    html;
+
+}
+
+/* LATEST */
+
+function getThaiFieldName(field){
+
+    const names = {
+
+        water:"น้ำ",
+
+        snack:"ขนม",
+
+        fried:"ของทอด"
+
+    };
+
+    return names[field] || field;
+
+}
+
+async function loadLatest(){
+
+    const res =
+    await fetch(API_URL + "?action=log");
+
+    const data =
+    await res.json();
+
+    const box =
+    document.getElementById("latestSaveBox");
+
+    if(data.length === 0){
+
+        box.innerHTML = `
+
+        <div class="text-muted">
+
+            ยังไม่มีข้อมูล
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+    let html = "";
+
+    data.reverse().slice(0,3).forEach(item => {
+
+        const fieldName =
+        getThaiFieldName(item.field);
+
+        const oldValue =
+        Number(item.old);
+
+        const newValue =
+        Number(item.new);
+
+        const changeClass =
+        newValue > oldValue
+        ? "latest-up"
+        : newValue < oldValue
+        ? "latest-down"
+        : "";
+
+        const changeText =
+        newValue > oldValue
+        ? "เพิ่ม"
+        : newValue < oldValue
+        ? "ลด"
+        : "แก้ไข";
+
+        html += `
+
+        <div class="latest-item ${changeClass}">
+
+            <div class="latest-head">
+
+                <div class="latest-code">
+                    ${item.code}
+                </div>
+
+                <div class="latest-change">
+                    ${changeText}
+                </div>
+
+            </div>
+
+            <div class="latest-detail">
+
+                <div class="latest-value">
+                    ${fieldName}: ${item.old}
+                </div>
+
+                <div class="latest-arrow">
+                    →
+                </div>
+
+                <div class="latest-value">
+                    ${item.new}
+                </div>
+
+            </div>
+
+            <div class="latest-time">
+
+                ${item.time}
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+    box.innerHTML = html;
 
 }
 
