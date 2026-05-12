@@ -1,254 +1,1057 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QR Generator Pro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- QR -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<title>ระบบเบิกอาหาร</title>
 
-<!-- ZIP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Tom Select -->
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+
+<!-- SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg,#ecfdf5,#d1fae5);
-  margin: 0;
-  padding: 20px;
+
+body{
+
+    background:
+    linear-gradient(
+        135deg,
+        #eef2f7 0%,
+        #dfe7f1 100%
+    );
+
+    font-family:
+    "Segoe UI",
+    sans-serif;
+
+    min-height:100vh;
+
 }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
+.card{
+
+    border:none;
+
+    border-radius:28px;
+
+    background:#ffffff;
+
+    box-shadow:
+    0 10px 35px rgba(0,0,0,.08);
+
 }
 
-h1 {
-  text-align: center;
-  color: #16a34a;
+.title{
+
+    font-size:32px;
+
+    font-weight:700;
+
+    color:#1e3a5f;
+
 }
 
-.topbar {
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  text-align: center;
-  margin-bottom: 20px;
+.form-label{
+
+    font-weight:600;
+
+    color:#374151;
+
 }
 
-input[type="file"] {
-  margin: 10px 0;
+.form-control,
+.form-select{
+
+    border-radius:16px;
+
+    border:1px solid #d1d5db;
+
+    padding:14px;
+
+    font-size:15px;
+
+    box-shadow:none;
+
 }
 
-button {
-  background: linear-gradient(135deg,#22c55e,#16a34a);
-  color: white;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 10px;
-  margin: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-  font-weight: bold;
+.form-control:focus,
+.form-select:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:
+    0 0 0 4px rgba(37,99,235,.12);
+
 }
 
-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+.form-control[readonly]{
+
+    background:#f3f4f6;
+
+    font-weight:600;
+
 }
 
-.status {
-  margin-top: 10px;
-  color: #555;
+.btn-main{
+
+    border:none;
+
+    border-radius:18px;
+
+    padding:14px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    transition:.2s;
+
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(230px,1fr));
-  gap: 20px;
+.btn-save{
+
+    background:
+    linear-gradient(
+        135deg,
+        #1e40af,
+        #2563eb
+    );
+
+    color:white;
+
 }
 
-.card {
-  background: white;
-  border-radius: 15px;
-  padding: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-  text-align: center;
-  transition: 0.3s;
+.btn-create{
+
+    background:
+    linear-gradient(
+        135deg,
+        #111827,
+        #374151
+    );
+
+    color:white;
+
 }
 
-.card:hover {
-  transform: translateY(-5px);
+.btn-main:hover{
+
+    transform:translateY(-2px);
+
 }
 
-.card img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
+.table{
+
+    margin-bottom:0;
+
 }
 
-.filename {
-  font-size: 13px;
-  color: #666;
-  margin-top: 8px;
+.table thead{
+
+    background:#1e3a5f;
+
+    color:white;
+
 }
 
-.qrbox {
-  margin-top: 10px;
+.table th{
+
+    padding:14px;
+
+    font-size:14px;
+
 }
 
-.download-btn {
-  margin-top: 10px;
-  background: #16a34a;
+.table td{
+
+    padding:12px;
+
+    font-size:14px;
+
 }
+
+.table tbody tr:nth-child(even){
+
+    background:#f8fafc;
+
+}
+
+.table tbody tr:hover{
+
+    background:#e8f0ff;
+
+}
+
+.log-table{
+
+    max-height:350px;
+
+    overflow:auto;
+
+    border-radius:18px;
+
+    border:1px solid #e5e7eb;
+
+}
+
+.current-box{
+
+    background:#eff6ff;
+
+    border:2px solid #bfdbfe;
+
+    border-radius:16px;
+
+    padding:14px;
+
+    text-align:center;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:#1d4ed8;
+
+}
+
+.plus-text{
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:#6b7280;
+
+    text-align:center;
+
+    margin:10px 0;
+
+}
+
+@media(max-width:768px){
+
+    .title{
+
+        font-size:26px;
+
+    }
+
+}
+
 </style>
-</head>
 
+</head>
 <body>
 
-<div class="container">
+<div class="container py-4">
 
-<h1>🚀 QR Generator</h1>
+<div class="row justify-content-center">
 
-<div class="topbar">
-  <input type="file" id="fileInput" multiple accept="image/*"><br>
-  <button onclick="upload()">สร้าง QR</button>
-  <button onclick="downloadAll()">ดาวน์โหลดทั้งหมด (ZIP)</button>
-  <div class="status" id="status"></div>
+<div class="col-lg-9">
+
+<!-- =========================
+     FORM
+========================= -->
+
+<div class="card p-4 mb-4">
+
+<h2 class="text-center mb-4 title">
+ระบบเบิกอาหาร
+</h2>
+
+<!-- CREATE SHEET -->
+
+<button
+class="btn btn-main btn-create w-100 mb-4"
+onclick="createSheet()">
+
+สร้างชีตใหม่ประจำวัน
+
+</button>
+
+<!-- CODE -->
+
+<div class="mb-4">
+
+<label class="form-label">
+เลือกรหัส
+</label>
+
+<select id="codeSelect" class="form-select">
+
+<option value="">
+เลือกรหัส
+</option>
+
+</select>
+
 </div>
 
-<div class="grid" id="qrcode"></div>
+<input type="hidden" id="row">
+
+<div class="row">
+
+<div class="col-md-4 mb-3">
+
+<label class="form-label">
+ยศ
+</label>
+
+<input
+type="text"
+id="rank"
+class="form-control"
+readonly>
 
 </div>
+
+<div class="col-md-4 mb-3">
+
+<label class="form-label">
+ชื่อ
+</label>
+
+<input
+type="text"
+id="firstname"
+class="form-control"
+readonly>
+
+</div>
+
+<div class="col-md-4 mb-3">
+
+<label class="form-label">
+สกุล
+</label>
+
+<input
+type="text"
+id="lastname"
+class="form-control"
+readonly>
+
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+รหัส
+</label>
+
+<input
+type="text"
+id="code"
+class="form-control"
+readonly>
+
+</div>
+
+<div class="col-md-6 mb-3">
+
+<label class="form-label">
+หมวด
+</label>
+
+<input
+type="text"
+id="group"
+class="form-control"
+readonly>
+
+</div>
+
+</div>
+
+<!-- =========================
+     FOOD SECTION
+========================= -->
+
+<div class="row">
+
+<!-- WATER -->
+
+<div class="col-md-4 mb-4">
+
+<label class="form-label">
+น้ำ (ปัจจุบัน)
+</label>
+
+<div class="current-box" id="waterCurrent">
+0
+</div>
+
+<div class="plus-text">
++
+</div>
+
+<label class="form-label">
+เพิ่ม
+</label>
+
+<select id="waterAdd" class="form-select"></select>
+
+</div>
+
+<!-- SNACK -->
+
+<div class="col-md-4 mb-4">
+
+<label class="form-label">
+ขนม (ปัจจุบัน)
+</label>
+
+<div class="current-box" id="snackCurrent">
+0
+</div>
+
+<div class="plus-text">
++
+</div>
+
+<label class="form-label">
+เพิ่ม
+</label>
+
+<select id="snackAdd" class="form-select"></select>
+
+</div>
+
+<!-- FRIED -->
+
+<div class="col-md-4 mb-4">
+
+<label class="form-label">
+ของทอด (ปัจจุบัน)
+</label>
+
+<div class="current-box" id="friedCurrent">
+0
+</div>
+
+<div class="plus-text">
++
+</div>
+
+<label class="form-label">
+เพิ่ม
+</label>
+
+<select id="friedAdd" class="form-select"></select>
+
+</div>
+
+</div>
+
+<button
+class="btn btn-main btn-save w-100"
+onclick="saveData()">
+
+บันทึกข้อมูล
+
+</button>
+
+</div>
+
+<!-- =========================
+     LOG
+========================= -->
+
+<div class="card p-4">
+
+<h4 class="mb-3">
+ประวัติการแก้ไข
+</h4>
+
+<div class="log-table">
+
+<table class="table table-bordered table-hover">
+
+<thead>
+
+<tr>
+
+<th>เวลา</th>
+<th>รหัส</th>
+<th>รายการ</th>
+<th>ค่าเก่า</th>
+<th>ค่าใหม่</th>
+
+</tr>
+
+</thead>
+
+<tbody id="logTable">
+
+<tr>
+
+<td colspan="5" class="text-center">
+
+ยังไม่มีข้อมูล
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
 
 <script>
-const API_KEY = "a56a16f08c5437dfae1e56ee20d80eea";
 
-let files = [];
-let fileNames = [];
+/* =========================
+   API URL
+========================= */
 
-document.getElementById("fileInput").onchange = (e)=>{
-  files = [...e.target.files];
+const API_URL =
+"https://script.google.com/macros/s/AKfycbyGBiG-ULn68Naj4wy6UXif7qhHuxOu_g4ey-P7sCJIbG3j8ubjz-VjFjXaIYBl3yemQg/exec";
+
+/* =========================
+   START
+========================= */
+
+window.onload = () => {
+
+    createNumberOptions();
+
+    loadCodes();
+
 };
 
-async function upload(){
+/* =========================
+   CREATE OPTIONS
+========================= */
 
-  const qrDiv = document.getElementById("qrcode");
-  const status = document.getElementById("status");
+function createNumberOptions(){
 
-  if(files.length===0){
-    alert("เลือกรูปก่อน");
-    return;
-  }
+    const selects = [
 
-  qrDiv.innerHTML = "";
-  fileNames = [];
+        "waterAdd",
+        "snackAdd",
+        "friedAdd"
 
-  status.innerText = "กำลังสร้าง QR...";
+    ];
 
-  for(let i=0;i<files.length;i++){
+    selects.forEach(id => {
+
+        const select =
+        document.getElementById(id);
+
+        for(let i=0;i<=50;i++){
+
+            const option =
+            document.createElement("option");
+
+            option.value = i;
+
+            option.textContent =
+            "+" + i;
+
+            select.appendChild(option);
+
+        }
+
+    });
+
+}
+
+/* =========================
+   LOAD CODES
+========================= */
+
+async function loadCodes(){
 
     try{
-      const fd = new FormData();
-      fd.append("image", files[i]);
 
-      const res = await fetch(
-        "https://api.imgbb.com/1/upload?key="+API_KEY,
-        { method:"POST", body:fd }
-      );
+        const res =
+        await fetch(API_URL + "?action=codes");
 
-      const data = await res.json();
+        const data =
+        await res.json();
 
-      if(!data.success){
-        status.innerText = "อัปโหลดไม่สำเร็จ";
-        continue;
-      }
+        const select =
+        document.getElementById("codeSelect");
 
-      fileNames.push(files[i].name);
+        data.forEach(item => {
 
-      const card = document.createElement("div");
-      card.className = "card";
+            const option =
+            document.createElement("option");
 
-      // preview
-      const img = document.createElement("img");
-      const reader = new FileReader();
-      reader.onload = e => img.src = e.target.result;
-      reader.readAsDataURL(files[i]);
+            option.value =
+            item.code;
 
-      // QR
-      const qrBox = document.createElement("div");
-      qrBox.className = "qrbox";
+            option.textContent =
+            item.code;
 
-      new QRCode(qrBox,{
-        text: data.data.url,
-        width: 180,
-        height: 180
-      });
+            select.appendChild(option);
 
-      // filename
-      const name = document.createElement("div");
-      name.className = "filename";
-      name.innerText = files[i].name;
+        });
 
-      // download single
-      const btn = document.createElement("button");
-      btn.className = "download-btn";
-      btn.innerText = "ดาวน์โหลด QR";
-      btn.onclick = ()=>{
-        const canvas = qrBox.querySelector("canvas");
-        const link = document.createElement("a");
-        link.href = canvas.toDataURL();
-        link.download = files[i].name.replace(/\.[^/.]+$/, "") + "_QR.png";
-        link.click();
-      };
+        const ts =
+        new TomSelect("#codeSelect",{
 
-      card.appendChild(img);
-      card.appendChild(qrBox);
-      card.appendChild(name);
-      card.appendChild(btn);
+            create:false,
 
-      qrDiv.appendChild(card);
+            sortField:{
+                field:"text",
+                direction:"asc"
+            }
+
+        });
+
+        ts.on("change", function(value){
+
+            loadData(value);
+
+        });
 
     }catch(err){
-      console.error(err);
-      status.innerText = "เกิด error";
+
+        Swal.fire({
+
+            icon:'error',
+
+            title:'โหลดรหัสไม่สำเร็จ'
+
+        });
+
     }
-  }
 
-  status.innerText = "เสร็จแล้ว 🎉";
 }
 
-// 🔥 ZIP download (ชื่อไฟล์เดิม)
-function downloadAll(){
+/* =========================
+   LOAD DATA
+========================= */
 
-  const canvases = document.querySelectorAll(".qrbox canvas");
+async function loadData(code){
 
-  if(canvases.length === 0){
-    alert("ยังไม่มี QR");
-    return;
-  }
+    if(!code) return;
 
-  const zip = new JSZip();
+    try{
 
-  canvases.forEach((canvas, i)=>{
+        const res =
+        await fetch(
 
-    let name = fileNames[i] || ("QR_"+(i+1));
-    name = name.replace(/\.[^/.]+$/, "");
+            API_URL +
+            "?action=get&code=" +
+            encodeURIComponent(code)
 
-    const base64 = canvas.toDataURL("image/png").split(",")[1];
+        );
 
-    zip.file(name + "_QR.png", base64, {base64:true});
-  });
+        const data =
+        await res.json();
 
-  zip.generateAsync({type:"blob"}).then(content=>{
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(content);
-    link.download = "QR_CODES.zip";
-    link.click();
-  });
+        if(data.error){
+
+            Swal.fire({
+
+                icon:'error',
+
+                title:'ไม่พบข้อมูล'
+
+            });
+
+            return;
+
+        }
+
+        document.getElementById("row").value =
+        data.row || "";
+
+        document.getElementById("rank").value =
+        data.rank || "";
+
+        document.getElementById("firstname").value =
+        data.firstname || "";
+
+        document.getElementById("lastname").value =
+        data.lastname || "";
+
+        document.getElementById("code").value =
+        data.code || "";
+
+        document.getElementById("group").value =
+        data.group || "";
+
+        document.getElementById("waterCurrent").innerText =
+        data.water || 0;
+
+        document.getElementById("snackCurrent").innerText =
+        data.snack || 0;
+
+        document.getElementById("friedCurrent").innerText =
+        data.fried || 0;
+
+        // reset add
+        document.getElementById("waterAdd").value = 0;
+        document.getElementById("snackAdd").value = 0;
+        document.getElementById("friedAdd").value = 0;
+
+        loadLog(code);
+
+    }catch(err){
+
+        Swal.fire({
+
+            icon:'error',
+
+            title:'โหลดข้อมูลไม่สำเร็จ'
+
+        });
+
+    }
+
 }
+
+/* =========================
+   SAVE DATA
+========================= */
+
+async function saveData(){
+
+    try{
+
+        const waterCurrent =
+        parseInt(
+        document.getElementById("waterCurrent").innerText
+        ) || 0;
+
+        const snackCurrent =
+        parseInt(
+        document.getElementById("snackCurrent").innerText
+        ) || 0;
+
+        const friedCurrent =
+        parseInt(
+        document.getElementById("friedCurrent").innerText
+        ) || 0;
+
+        const waterAdd =
+        parseInt(
+        document.getElementById("waterAdd").value
+        ) || 0;
+
+        const snackAdd =
+        parseInt(
+        document.getElementById("snackAdd").value
+        ) || 0;
+
+        const friedAdd =
+        parseInt(
+        document.getElementById("friedAdd").value
+        ) || 0;
+
+        const finalWater =
+        waterCurrent + waterAdd;
+
+        const finalSnack =
+        snackCurrent + snackAdd;
+
+        const finalFried =
+        friedCurrent + friedAdd;
+
+        Swal.fire({
+
+            title:'กำลังบันทึกข้อมูล',
+
+            html:`
+
+            <div class="progress mt-3">
+
+                <div
+                class="progress-bar progress-bar-striped progress-bar-animated"
+                style="width:100%">
+                </div>
+
+            </div>
+
+            `,
+
+            allowOutsideClick:false,
+
+            showConfirmButton:false
+
+        });
+
+        const params =
+        new URLSearchParams({
+
+            action:"save",
+
+            row:
+            document.getElementById("row").value,
+
+            code:
+            document.getElementById("code").value,
+
+            water:finalWater,
+
+            snack:finalSnack,
+
+            fried:finalFried
+
+        });
+
+        const res =
+        await fetch(
+
+            API_URL +
+            "?" +
+            params.toString()
+
+        );
+
+        const result =
+        await res.json();
+
+        Swal.close();
+
+        if(result.success){
+
+            Swal.fire({
+
+                icon:'success',
+
+                title:'บันทึกสำเร็จ',
+
+                timer:1500,
+
+                showConfirmButton:false
+
+            });
+
+            loadData(
+                document.getElementById("code").value
+            );
+
+        }else{
+
+            Swal.fire({
+
+                icon:'error',
+
+                title:'บันทึกไม่สำเร็จ'
+
+            });
+
+        }
+
+    }catch(err){
+
+        Swal.fire({
+
+            icon:'error',
+
+            title:'เชื่อมต่อไม่สำเร็จ'
+
+        });
+
+    }
+
+}
+
+/* =========================
+   LOAD LOG
+========================= */
+
+async function loadLog(code=""){
+
+    try{
+
+        let url =
+        API_URL + "?action=log";
+
+        if(code){
+
+            url +=
+            "&code=" +
+            encodeURIComponent(code);
+
+        }
+
+        const res =
+        await fetch(url);
+
+        const data =
+        await res.json();
+
+        let html = "";
+
+        if(data.length === 0){
+
+            html = `
+
+            <tr>
+
+            <td colspan="5" class="text-center">
+
+            ไม่มีประวัติการแก้ไข
+
+            </td>
+
+            </tr>
+
+            `;
+
+        }
+
+        data.reverse().forEach(item => {
+
+            html += `
+
+            <tr>
+
+            <td>${item.time}</td>
+            <td>${item.code}</td>
+            <td>${item.field}</td>
+            <td>${item.old}</td>
+            <td>${item.new}</td>
+
+            </tr>
+
+            `;
+
+        });
+
+        document.getElementById("logTable").innerHTML =
+        html;
+
+    }catch(err){
+
+        console.error(err);
+
+    }
+
+}
+
+/* =========================
+   CREATE SHEET
+========================= */
+
+async function createSheet(){
+
+    const confirm =
+    await Swal.fire({
+
+        title:'สร้างชีตใหม่ ?',
+
+        text:'ระบบจะสร้างชีตประจำวัน',
+
+        icon:'question',
+
+        showCancelButton:true,
+
+        confirmButtonText:'สร้าง',
+
+        cancelButtonText:'ยกเลิก',
+
+        confirmButtonColor:'#2563eb'
+
+    });
+
+    if(!confirm.isConfirmed){
+        return;
+    }
+
+    try{
+
+        Swal.fire({
+
+            title:'กำลังสร้างชีต',
+
+            html:`
+
+            <div class="progress mt-3">
+
+                <div
+                class="progress-bar progress-bar-striped progress-bar-animated"
+                style="width:100%">
+                </div>
+
+            </div>
+
+            `,
+
+            allowOutsideClick:false,
+
+            showConfirmButton:false
+
+        });
+
+        const res =
+        await fetch(
+            API_URL + "?action=createSheet"
+        );
+
+        const data =
+        await res.json();
+
+        Swal.close();
+
+        if(data.success){
+
+            Swal.fire({
+
+                icon:'success',
+
+                title:'สร้างชีตสำเร็จ',
+
+                text:data.sheetName
+
+            });
+
+        }else{
+
+            Swal.fire({
+
+                icon:'error',
+
+                title:'สร้างชีตไม่สำเร็จ',
+
+                text:data.message
+
+            });
+
+        }
+
+    }catch(err){
+
+        Swal.fire({
+
+            icon:'error',
+
+            title:'เชื่อมต่อไม่สำเร็จ'
+
+        });
+
+    }
+
+}
+
 </script>
 
 </body>
