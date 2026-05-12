@@ -241,6 +241,16 @@ body{
 
 }
 
+.profile-grid{
+
+    display:grid;
+
+    grid-template-columns:.8fr 1fr 1fr 1fr 1fr;
+
+    gap:12px;
+
+}
+
 .code-picker-grid{
 
     display:grid;
@@ -358,6 +368,42 @@ body{
 
 }
 
+.top-actions{
+
+    display:grid;
+
+    gap:8px;
+
+    min-width:230px;
+
+}
+
+.top-actions .sheet-status,
+.top-actions #connectionStatus,
+.top-actions .btn-sheet{
+
+    width:100%;
+
+    min-height:42px;
+
+    justify-content:center;
+
+    text-align:center;
+
+}
+
+.top-actions .btn-sheet{
+
+    border-radius:999px;
+
+    padding:9px 12px;
+
+    font-size:14px;
+
+    font-weight:800;
+
+}
+
 .sheet-status-dot{
 
     width:10px;
@@ -372,21 +418,111 @@ body{
 
 .current-box{
 
-    background:#eff6ff;
+    background:#ffffff;
 
-    border:2px solid #bfdbfe;
+    border:1px solid rgba(148,163,184,.28);
 
-    border-radius:16px;
+    border-radius:18px;
 
-    padding:14px;
+    padding:16px 14px;
 
     text-align:center;
 
-    font-size:22px;
+    font-size:28px;
 
-    font-weight:700;
+    font-weight:900;
 
     color:#1d4ed8;
+
+    box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.8),
+    0 8px 18px rgba(15,23,42,.08);
+
+}
+
+.after-save{
+
+    grid-column:1;
+
+    grid-row:2;
+
+    margin-top:10px;
+
+    border-radius:14px;
+
+    padding:10px 12px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    font-weight:900;
+
+    background:rgba(255,255,255,.74);
+
+    color:#334155;
+
+    border:1px solid rgba(255,255,255,.72);
+
+    box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.78);
+
+}
+
+.after-save strong{
+
+    display:block;
+
+    margin-top:2px;
+
+    font-size:24px;
+
+    color:#0f172a;
+
+}
+
+.change-preview{
+
+    margin-top:8px;
+
+    border-radius:12px;
+
+    padding:8px 10px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    font-weight:900;
+
+    background:rgba(255,255,255,.72);
+
+    color:#64748b;
+
+    border:1px solid rgba(255,255,255,.7);
+
+    box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.75);
+
+}
+
+.change-preview.is-plus{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+    border-color:#86efac;
+
+}
+
+.change-preview.is-minus{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+    border-color:#fca5a5;
 
 }
 
@@ -408,31 +544,121 @@ body{
 
 }
 
+.minus-control{
+
+    display:none;
+
+}
+
 .quick-actions{
 
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr 1fr auto;
 
-    gap:8px;
+    gap:10px;
 
-    margin-top:10px;
+    margin-top:14px;
 
 }
 
 .quick-btn{
 
+    position:relative;
+
+    overflow:hidden;
+
     border:none;
 
-    border-radius:12px;
+    border-radius:16px;
 
-    padding:10px;
+    padding:12px;
 
-    font-size:14px;
+    font-size:20px;
 
     font-weight:900;
 
     color:white;
+
+    transform:translateY(0) scale(1);
+
+    transition:
+    transform .16s ease,
+    filter .16s ease,
+    box-shadow .16s ease;
+
+    box-shadow:
+    0 8px 18px rgba(15,23,42,.12);
+
+}
+
+.quick-btn::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:50%;
+
+    width:0;
+
+    height:0;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.35);
+
+    transform:translate(-50%,-50%);
+
+    opacity:0;
+
+}
+
+.quick-btn:hover{
+
+    filter:saturate(1.08) brightness(1.02);
+
+    transform:translateY(-1px) scale(1.02);
+
+}
+
+.quick-btn:active,
+.quick-btn.is-pressing{
+
+    transform:translateY(2px) scale(.96);
+
+    box-shadow:
+    0 4px 10px rgba(15,23,42,.18);
+
+}
+
+.quick-btn.is-pressing::after{
+
+    animation:quickRipple .42s ease-out;
+
+}
+
+@keyframes quickRipple{
+
+    0%{
+
+        width:0;
+
+        height:0;
+
+        opacity:.65;
+
+    }
+
+    100%{
+
+        width:150px;
+
+        height:150px;
+
+        opacity:0;
+
+    }
 
 }
 
@@ -442,29 +668,242 @@ body{
 
 }
 
+.quick-reset{
+
+    background:#475569;
+
+    min-width:64px;
+
+    font-size:15px;
+
+}
+
+.item-card.is-active{
+
+    animation:itemPulse .45s ease-out;
+
+}
+
+@keyframes itemPulse{
+
+    0%{
+
+        transform:scale(1);
+
+        box-shadow:0 8px 20px rgba(15,23,42,.07);
+
+    }
+
+    45%{
+
+        transform:scale(1.025);
+
+        box-shadow:0 14px 30px rgba(15,23,42,.16);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        box-shadow:0 8px 20px rgba(15,23,42,.07);
+
+    }
+
+}
+
 .quick-minus{
 
     background:#dc2626;
 
 }
 
+.item-card-water .quick-plus{
+
+    background:#2563eb;
+
+}
+
+.item-card-water .quick-reset{
+
+    background:#1e40af;
+
+}
+
+.item-card-snack .quick-plus{
+
+    background:#ea580c;
+
+}
+
+.item-card-snack .quick-reset{
+
+    background:#9a3412;
+
+}
+
+.item-card-fried .quick-plus{
+
+    background:#16a34a;
+
+}
+
+.item-card-fried .quick-reset{
+
+    background:#166534;
+
+}
+
 .plus-text{
 
-    text-align:center;
-
-    font-size:24px;
-
-    font-weight:700;
-
-    margin:10px 0;
-
-    color:#6b7280;
+    display:none;
 
 }
 
 .item-card{
 
-    border-radius:20px;
+    border-radius:24px;
+
+    overflow:hidden;
+
+    padding:0 14px 14px;
+
+    box-shadow:
+    0 14px 30px rgba(15,23,42,.10),
+    inset 0 1px 0 rgba(255,255,255,.75);
+
+}
+
+.item-head{
+
+    margin:0 -14px 16px;
+
+    border-radius:22px 22px 16px 16px;
+
+    padding:14px 16px;
+
+    color:white;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    text-align:center;
+
+    box-shadow:inset 0 -1px 0 rgba(255,255,255,.16);
+
+}
+
+.item-icon{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:30px;
+
+    height:30px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.22);
+
+    font-size:17px;
+
+}
+
+.btn-icon{
+
+    display:inline-block;
+
+    margin-right:5px;
+
+    font-weight:900;
+
+}
+
+.item-card-water .item-head{
+
+    background:#2563eb;
+
+}
+
+.item-card-snack .item-head{
+
+    background:#ea580c;
+
+}
+
+.item-card-fried .item-head{
+
+    background:#16a34a;
+
+}
+
+.item-card-water{
+
+    background:
+    linear-gradient(180deg,#eff6ff 0%,#dbeafe 100%);
+
+    border:1px solid #bfdbfe;
+
+}
+
+.item-card-snack{
+
+    background:
+    linear-gradient(180deg,#fff7ed 0%,#ffedd5 100%);
+
+    border:1px solid #fed7aa;
+
+}
+
+.item-card-fried{
+
+    background:
+    linear-gradient(180deg,#f0fdf4 0%,#dcfce7 100%);
+
+    border:1px solid #bbf7d0;
+
+}
+
+.item-card-water .current-box{
+
+    background:#dbeafe;
+
+    border-color:#93c5fd;
+
+    color:#1d4ed8;
+
+}
+
+.item-card-snack .current-box{
+
+    background:#ffedd5;
+
+    border-color:#fdba74;
+
+    color:#c2410c;
+
+}
+
+.item-card-fried .current-box{
+
+    background:#dcfce7;
+
+    border-color:#86efac;
+
+    color:#15803d;
 
 }
 
@@ -477,6 +916,135 @@ body{
     border-radius:18px;
 
     border:1px solid #e5e7eb;
+
+}
+
+.summary-chart{
+
+    display:grid;
+
+    gap:12px;
+
+    margin-bottom:18px;
+
+}
+
+.summary-chart-total{
+
+    border-radius:18px;
+
+    padding:14px;
+
+    text-align:center;
+
+    background:#0f172a;
+
+    color:white;
+
+    box-shadow:0 10px 22px rgba(15,23,42,.14);
+
+}
+
+.summary-chart-total span{
+
+    display:block;
+
+    font-size:13px;
+
+    font-weight:800;
+
+    color:#cbd5e1;
+
+}
+
+.summary-chart-total strong{
+
+    display:block;
+
+    margin-top:4px;
+
+    font-size:28px;
+
+    font-weight:900;
+
+}
+
+.summary-chart-bars{
+
+    display:grid;
+
+    gap:10px;
+
+}
+
+.summary-chart-row{
+
+    display:grid;
+
+    grid-template-columns:76px 1fr 70px;
+
+    gap:10px;
+
+    align-items:center;
+
+}
+
+.summary-chart-label,
+.summary-chart-value{
+
+    font-size:14px;
+
+    font-weight:900;
+
+    color:#334155;
+
+}
+
+.summary-chart-value{
+
+    text-align:right;
+
+}
+
+.summary-chart-track{
+
+    height:14px;
+
+    overflow:hidden;
+
+    border-radius:999px;
+
+    background:#e5e7eb;
+
+}
+
+.summary-chart-bar{
+
+    width:0%;
+
+    height:100%;
+
+    border-radius:999px;
+
+    transition:width .35s ease;
+
+}
+
+.summary-chart-bar.water{
+
+    background:#2563eb;
+
+}
+
+.summary-chart-bar.snack{
+
+    background:#ea580c;
+
+}
+
+.summary-chart-bar.fried{
+
+    background:#16a34a;
 
 }
 
@@ -700,6 +1268,26 @@ body{
 
 }
 
+.latest-toggle{
+
+    display:none;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:8px 12px;
+
+    font-size:13px;
+
+    font-weight:900;
+
+    background:#1d4ed8;
+
+    color:white;
+
+}
+
 .latest-item{
 
     position:relative;
@@ -907,7 +1495,9 @@ body{
 
     .title{
 
-        font-size:24px;
+        font-size:20px;
+
+        line-height:1.35;
 
     }
 
@@ -925,9 +1515,47 @@ body{
 
         width:100%;
 
+        max-width:100%;
+
         justify-content:center;
 
-        border-radius:16px;
+        border-radius:999px;
+
+        padding:7px 10px;
+
+        font-size:12px;
+
+    }
+
+    .top-actions{
+
+        width:100%;
+
+        min-width:0;
+
+    }
+
+    .top-actions .sheet-status,
+    .top-actions #connectionStatus,
+    .top-actions .btn-sheet{
+
+        min-height:40px;
+
+        font-size:12px !important;
+
+    }
+
+    #connectionStatus{
+
+        font-size:12px !important;
+
+        padding:7px 10px !important;
+
+    }
+
+    .d-flex.justify-content-between{
+
+        margin-bottom:16px !important;
 
     }
 
@@ -974,6 +1602,38 @@ body{
 
     }
 
+    .latest-title-actions{
+
+        display:flex;
+
+        width:100%;
+
+        align-items:center;
+
+        justify-content:space-between;
+
+        gap:8px;
+
+    }
+
+    .latest-toggle{
+
+        display:inline-flex;
+
+        align-items:center;
+
+        justify-content:center;
+
+        flex:0 0 auto;
+
+    }
+
+    .floating-latest.is-collapsed #latestSaveBox{
+
+        display:none;
+
+    }
+
     .latest-title h5{
 
         font-size:17px;
@@ -982,24 +1642,58 @@ body{
 
     .latest-item{
 
-        padding:10px 10px 10px 14px;
+        padding:8px 10px 8px 14px;
 
-        margin-bottom:8px;
+        margin-bottom:7px;
+
+    }
+
+    .latest-head{
+
+        margin-bottom:4px;
+
+    }
+
+    .latest-code{
+
+        font-size:14px;
+
+    }
+
+    .latest-change,
+    .latest-time{
+
+        font-size:11px;
+
+    }
+
+    .latest-value{
+
+        padding:5px 7px;
+
+        font-size:12px;
 
     }
 
     .item-card{
 
-        background:#ffffff;
+        border-radius:24px;
 
-        border:1px solid #e5e7eb;
-
-        border-radius:20px;
-
-        padding:16px;
+        padding:0 14px 14px;
 
         box-shadow:
-        0 8px 20px rgba(15,23,42,.07);
+        0 12px 26px rgba(15,23,42,.10),
+        inset 0 1px 0 rgba(255,255,255,.75);
+
+    }
+
+    .item-head{
+
+        margin:0 -14px 14px;
+
+        border-radius:22px 22px 16px 16px;
+
+        font-size:22px;
 
     }
 
@@ -1017,11 +1711,19 @@ body{
 
     }
 
+    .after-save{
+
+        grid-column:auto;
+
+        grid-row:auto;
+
+    }
+
     .current-box{
 
         padding:18px;
 
-        font-size:30px;
+        font-size:34px;
 
     }
 
@@ -1035,9 +1737,17 @@ body{
 
     }
 
+    .profile-grid{
+
+        grid-template-columns:1fr;
+
+        gap:10px;
+
+    }
+
     .quick-actions{
 
-        grid-template-columns:1fr 1fr;
+        grid-template-columns:1fr 1fr auto;
 
         gap:10px;
 
@@ -1047,15 +1757,41 @@ body{
 
         min-height:52px;
 
-        font-size:18px;
+        font-size:22px;
 
         border-radius:16px;
+
+    }
+
+    .quick-reset{
+
+        font-size:15px;
 
     }
 
     .action-buttons{
 
         grid-template-columns:1fr;
+
+    }
+
+    .card .action-buttons{
+
+        position:sticky;
+
+        bottom:0;
+
+        z-index:20;
+
+        margin:18px -18px -18px;
+
+        padding:12px;
+
+        background:rgba(255,255,255,.96);
+
+        border-top:1px solid #e5e7eb;
+
+        box-shadow:0 -8px 24px rgba(15,23,42,.08);
 
     }
 
@@ -1078,6 +1814,112 @@ body{
         min-height:54px;
 
         font-size:16px;
+
+    }
+
+    .log-table{
+
+        max-height:none;
+
+        overflow:visible;
+
+        border:none;
+
+        border-radius:0;
+
+    }
+
+    .log-table table,
+    .log-table thead,
+    .log-table tbody,
+    .log-table tr,
+    .log-table td{
+
+        display:block;
+
+        width:100%;
+
+    }
+
+    .log-table thead{
+
+        display:none;
+
+    }
+
+    .log-table table{
+
+        border:0;
+
+    }
+
+    .log-table tr{
+
+        margin-bottom:12px;
+
+        border:1px solid #e5e7eb;
+
+        border-radius:16px;
+
+        overflow:hidden;
+
+        background:#ffffff;
+
+        box-shadow:0 8px 18px rgba(15,23,42,.06);
+
+    }
+
+    .log-table td{
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:space-between;
+
+        gap:12px;
+
+        border:0;
+
+        border-bottom:1px solid #eef2f7;
+
+        padding:10px 12px;
+
+        text-align:right;
+
+    }
+
+    .log-table td:last-child{
+
+        border-bottom:0;
+
+    }
+
+    .log-table td::before{
+
+        content:attr(data-label);
+
+        flex:0 0 auto;
+
+        text-align:left;
+
+        font-weight:900;
+
+        color:#64748b;
+
+    }
+
+    .log-table td[colspan]{
+
+        display:block;
+
+        text-align:center;
+
+    }
+
+    .log-table td[colspan]::before{
+
+        content:"";
 
     }
 
@@ -1114,9 +1956,21 @@ body{
 บันทึกล่าสุด
 </h5>
 
+<div class="latest-title-actions">
+
 <span class="latest-badge">
 ล่าสุด 3 รายการ
 </span>
+
+<button
+type="button"
+id="latestToggle"
+class="latest-toggle"
+onclick="toggleLatestBox()">
+แสดง
+</button>
+
+</div>
 
 </div>
 
@@ -1150,6 +2004,8 @@ body{
 ระบบPx หน่วยฝึกทหารใหม่ปตอ.๒พัน.๑
 </h2>
 
+<div class="top-actions">
+
 <button
 type="button"
 id="sheetStatus"
@@ -1166,6 +2022,17 @@ id="connectionStatus"
 class="badge rounded-pill px-3 py-2 fs-6 status-loading">
 
 กำลังตรวจสอบ...
+
+</div>
+
+<button
+class="btn btn-main btn-sheet"
+onclick="createDailySheet()">
+
+<span class="btn-icon">＋</span>
+สร้าง Sheet เบิกแต่ละวัน
+
+</button>
 
 </div>
 
@@ -1201,9 +2068,9 @@ onclick="openCodePopup()">
 
 <input type="hidden" id="row">
 
-<div class="row">
+<div class="profile-grid mb-3">
 
-<div class="col-md-4 mb-3">
+<div>
 
 <label class="form-label">
 ยศ
@@ -1217,7 +2084,7 @@ readonly>
 
 </div>
 
-<div class="col-md-4 mb-3">
+<div>
 
 <label class="form-label">
 ชื่อ
@@ -1231,7 +2098,7 @@ readonly>
 
 </div>
 
-<div class="col-md-4 mb-3">
+<div>
 
 <label class="form-label">
 สกุล
@@ -1245,11 +2112,7 @@ readonly>
 
 </div>
 
-</div>
-
-<div class="row">
-
-<div class="col-md-6 mb-3">
+<div>
 
 <label class="form-label">
 รหัส
@@ -1263,7 +2126,7 @@ readonly>
 
 </div>
 
-<div class="col-md-6 mb-3">
+<div>
 
 <label class="form-label">
 หมวด
@@ -1285,11 +2148,12 @@ readonly>
 
 <!-- WATER -->
 
-<div class="col-md-4 mb-4 item-card">
+<div class="col-md-4 mb-4 item-card item-card-water">
 
-<label class="form-label">
-น้ำ (ปัจจุบัน)
-</label>
+<div class="item-head">
+<span class="item-icon">น้ำ</span>
+น้ำ
+</div>
 
 <div class="current-actions">
 
@@ -1297,7 +2161,16 @@ readonly>
 0
 </div>
 
-<div>
+<div class="after-save">
+หลังบันทึก
+<strong id="waterPreview">0</strong>
+</div>
+
+<div class="change-preview" id="waterChangePreview">
+กดไป 0
+</div>
+
+<div class="minus-control">
 
 <label class="form-label text-danger">
 ลด
@@ -1311,11 +2184,11 @@ readonly>
 
 <div class="plus-text">+</div>
 
-<label class="form-label">
+<label class="form-label d-none">
 เพิ่ม
 </label>
 
-<select id="waterAdd" class="form-select"></select>
+<select id="waterAdd" class="form-select d-none"></select>
 
 <div class="quick-actions">
 
@@ -1323,14 +2196,22 @@ readonly>
 type="button"
 class="quick-btn quick-minus"
 onclick="adjustSelect('waterMinus', 1)">
--1
+<span class="btn-icon">−</span>1
 </button>
 
 <button
 type="button"
 class="quick-btn quick-plus"
 onclick="adjustSelect('waterAdd', 1)">
-+1
+<span class="btn-icon">＋</span>1
+</button>
+
+<button
+type="button"
+class="quick-btn quick-reset"
+onclick="resetItem('water')">
+<span class="btn-icon">↺</span>
+ล้าง
 </button>
 
 </div>
@@ -1339,11 +2220,12 @@ onclick="adjustSelect('waterAdd', 1)">
 
 <!-- SNACK -->
 
-<div class="col-md-4 mb-4 item-card">
+<div class="col-md-4 mb-4 item-card item-card-snack">
 
-<label class="form-label">
-ขนม (ปัจจุบัน)
-</label>
+<div class="item-head">
+<span class="item-icon">ข</span>
+ขนม
+</div>
 
 <div class="current-actions">
 
@@ -1351,7 +2233,16 @@ onclick="adjustSelect('waterAdd', 1)">
 0
 </div>
 
-<div>
+<div class="after-save">
+หลังบันทึก
+<strong id="snackPreview">0</strong>
+</div>
+
+<div class="change-preview" id="snackChangePreview">
+กดไป 0
+</div>
+
+<div class="minus-control">
 
 <label class="form-label text-danger">
 ลด
@@ -1365,11 +2256,11 @@ onclick="adjustSelect('waterAdd', 1)">
 
 <div class="plus-text">+</div>
 
-<label class="form-label">
+<label class="form-label d-none">
 เพิ่ม
 </label>
 
-<select id="snackAdd" class="form-select"></select>
+<select id="snackAdd" class="form-select d-none"></select>
 
 <div class="quick-actions">
 
@@ -1377,14 +2268,22 @@ onclick="adjustSelect('waterAdd', 1)">
 type="button"
 class="quick-btn quick-minus"
 onclick="adjustSelect('snackMinus', 1)">
--1
+<span class="btn-icon">−</span>1
 </button>
 
 <button
 type="button"
 class="quick-btn quick-plus"
 onclick="adjustSelect('snackAdd', 1)">
-+1
+<span class="btn-icon">＋</span>1
+</button>
+
+<button
+type="button"
+class="quick-btn quick-reset"
+onclick="resetItem('snack')">
+<span class="btn-icon">↺</span>
+ล้าง
 </button>
 
 </div>
@@ -1393,11 +2292,12 @@ onclick="adjustSelect('snackAdd', 1)">
 
 <!-- FRIED -->
 
-<div class="col-md-4 mb-4 item-card">
+<div class="col-md-4 mb-4 item-card item-card-fried">
 
-<label class="form-label">
-ของทอด (ปัจจุบัน)
-</label>
+<div class="item-head">
+<span class="item-icon">ท</span>
+ของทอด
+</div>
 
 <div class="current-actions">
 
@@ -1405,7 +2305,16 @@ onclick="adjustSelect('snackAdd', 1)">
 0
 </div>
 
-<div>
+<div class="after-save">
+หลังบันทึก
+<strong id="friedPreview">0</strong>
+</div>
+
+<div class="change-preview" id="friedChangePreview">
+กดไป 0
+</div>
+
+<div class="minus-control">
 
 <label class="form-label text-danger">
 ลด
@@ -1419,11 +2328,11 @@ onclick="adjustSelect('snackAdd', 1)">
 
 <div class="plus-text">+</div>
 
-<label class="form-label">
+<label class="form-label d-none">
 เพิ่ม
 </label>
 
-<select id="friedAdd" class="form-select"></select>
+<select id="friedAdd" class="form-select d-none"></select>
 
 <div class="quick-actions">
 
@@ -1431,14 +2340,22 @@ onclick="adjustSelect('snackAdd', 1)">
 type="button"
 class="quick-btn quick-minus"
 onclick="adjustSelect('friedMinus', 1)">
--1
+<span class="btn-icon">−</span>1
 </button>
 
 <button
 type="button"
 class="quick-btn quick-plus"
 onclick="adjustSelect('friedAdd', 1)">
-+1
+<span class="btn-icon">＋</span>1
+</button>
+
+<button
+type="button"
+class="quick-btn quick-reset"
+onclick="resetItem('fried')">
+<span class="btn-icon">↺</span>
+ล้าง
 </button>
 
 </div>
@@ -1467,14 +2384,6 @@ onclick="saveData()">
 
 </div>
 
-<button
-class="btn btn-main btn-sheet w-100 mt-3"
-onclick="createDailySheet()">
-
-สร้าง Sheet เบิกแต่ละวัน
-
-</button>
-
 </div>
 
 <!-- LOG -->
@@ -1484,11 +2393,60 @@ onclick="createDailySheet()">
 <div class="log-title">
 
 <h4>
-ประวัติการแก้ไข
+กราฟสรุปยอด
 </h4>
 
 <span class="log-badge">
-รายการย้อนหลัง
+F85 / G85 / H85 / I85
+</span>
+
+</div>
+
+<div class="summary-chart">
+
+<div class="summary-chart-total">
+<span>รวมเงินทั้งหมด</span>
+<strong id="summaryTotal">0 บาท</strong>
+</div>
+
+<div class="summary-chart-bars">
+
+<div class="summary-chart-row">
+<div class="summary-chart-label">น้ำ</div>
+<div class="summary-chart-track">
+<div class="summary-chart-bar water" id="waterSummaryBar"></div>
+</div>
+<div class="summary-chart-value" id="waterSummaryValue">0</div>
+</div>
+
+<div class="summary-chart-row">
+<div class="summary-chart-label">ขนม</div>
+<div class="summary-chart-track">
+<div class="summary-chart-bar snack" id="snackSummaryBar"></div>
+</div>
+<div class="summary-chart-value" id="snackSummaryValue">0</div>
+</div>
+
+<div class="summary-chart-row">
+<div class="summary-chart-label">ของทอด</div>
+<div class="summary-chart-track">
+<div class="summary-chart-bar fried" id="friedSummaryBar"></div>
+</div>
+<div class="summary-chart-value" id="friedSummaryValue">0</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="log-title">
+
+<h4>
+ยอดการซื้อ
+</h4>
+
+<span class="log-badge">
+สรุปจาก Sheet
 </span>
 
 </div>
@@ -1501,11 +2459,11 @@ onclick="createDailySheet()">
 
 <tr>
 
-<th>เวลา</th>
 <th>รหัส</th>
-<th>รายการ</th>
-<th>ค่าเก่า</th>
-<th>ค่าใหม่</th>
+<th>น้ำ</th>
+<th>ขนม</th>
+<th>ของทอด</th>
+<th>รวมเงิน</th>
 
 </tr>
 
@@ -1552,7 +2510,15 @@ let codeList = [];
 
 window.onload = () => {
 
+    setupMobileLatest();
+
+    setupQuickButtonAnimation();
+
     createNumberOptions();
+
+    setupPreviewListeners();
+
+    updateAllPreviews();
 
     checkConnection();
 
@@ -1562,7 +2528,76 @@ window.onload = () => {
 
     loadLatest();
 
+    loadPurchaseChart();
+
+    loadPurchaseSummary();
+
 };
+
+function setupMobileLatest(){
+
+    const latest =
+    document.querySelector(".floating-latest");
+
+    const toggle =
+    document.getElementById("latestToggle");
+
+    if(!latest || !toggle) return;
+
+    const isMobile =
+    window.matchMedia("(max-width: 991px)").matches;
+
+    latest.classList.toggle("is-collapsed", isMobile);
+
+    toggle.innerText =
+    isMobile
+    ? "แสดง"
+    : "ซ่อน";
+
+}
+
+function setupQuickButtonAnimation(){
+
+    document.querySelectorAll(".quick-btn").forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            button.classList.remove("is-pressing");
+
+            void button.offsetWidth;
+
+            button.classList.add("is-pressing");
+
+            window.setTimeout(() => {
+
+                button.classList.remove("is-pressing");
+
+            }, 420);
+
+        });
+
+    });
+
+}
+
+function toggleLatestBox(){
+
+    const latest =
+    document.querySelector(".floating-latest");
+
+    const toggle =
+    document.getElementById("latestToggle");
+
+    if(!latest || !toggle) return;
+
+    latest.classList.toggle("is-collapsed");
+
+    toggle.innerText =
+    latest.classList.contains("is-collapsed")
+    ? "แสดง"
+    : "ซ่อน";
+
+}
 
 /* OPTIONS */
 
@@ -1615,6 +2650,182 @@ function adjustSelect(id, amount){
 
     select.value =
     next;
+
+    updatePreviewFromSelect(id);
+
+    highlightItemFromSelect(id);
+
+}
+
+function setupPreviewListeners(){
+
+    [
+        "waterAdd",
+        "waterMinus",
+        "snackAdd",
+        "snackMinus",
+        "friedAdd",
+        "friedMinus"
+    ].forEach(id => {
+
+        const select =
+        document.getElementById(id);
+
+        if(!select) return;
+
+        select.addEventListener("change", () => {
+
+            updatePreviewFromSelect(id);
+
+            highlightItemFromSelect(id);
+
+        });
+
+    });
+
+}
+
+function getItemPreview(type){
+
+    const current =
+    parseInt(
+    document.getElementById(type + "Current").innerText
+    ) || 0;
+
+    const add =
+    parseInt(
+    document.getElementById(type + "Add").value
+    ) || 0;
+
+    const minus =
+    parseInt(
+    document.getElementById(type + "Minus").value
+    ) || 0;
+
+    return Math.max(0, current + add - minus);
+
+}
+
+function updateItemPreview(type){
+
+    const preview =
+    document.getElementById(type + "Preview");
+
+    const changePreview =
+    document.getElementById(type + "ChangePreview");
+
+    if(!preview) return;
+
+    const current =
+    parseInt(
+    document.getElementById(type + "Current").innerText
+    ) || 0;
+
+    const finalValue =
+    getItemPreview(type);
+
+    const change =
+    finalValue - current;
+
+    preview.innerText =
+    finalValue;
+
+    if(!changePreview) return;
+
+    changePreview.classList.remove(
+        "is-plus",
+        "is-minus"
+    );
+
+    if(change > 0){
+
+        changePreview.innerText =
+        "กดไป +" + change;
+
+        changePreview.classList.add("is-plus");
+
+    }else if(change < 0){
+
+        changePreview.innerText =
+        "กดไป " + change;
+
+        changePreview.classList.add("is-minus");
+
+    }else{
+
+        changePreview.innerText =
+        "กดไป 0";
+
+    }
+
+}
+
+function updateAllPreviews(){
+
+    ["water","snack","fried"].forEach(updateItemPreview);
+
+}
+
+function getItemTypeFromSelect(id){
+
+    return id
+    .replace("Add", "")
+    .replace("Minus", "");
+
+}
+
+function updatePreviewFromSelect(id){
+
+    updateItemPreview(
+        getItemTypeFromSelect(id)
+    );
+
+}
+
+function highlightItem(type){
+
+    const card =
+    document.querySelector(".item-card-" + type);
+
+    if(!card) return;
+
+    card.classList.remove("is-active");
+
+    void card.offsetWidth;
+
+    card.classList.add("is-active");
+
+    window.setTimeout(() => {
+
+        card.classList.remove("is-active");
+
+    }, 450);
+
+}
+
+function highlightItemFromSelect(id){
+
+    highlightItem(
+        getItemTypeFromSelect(id)
+    );
+
+}
+
+function resetItem(type){
+
+    const add =
+    document.getElementById(type + "Add");
+
+    const minus =
+    document.getElementById(type + "Minus");
+
+    if(add) add.value = 0;
+
+    if(minus) minus.value = 0;
+
+    updateItemPreview(type);
+
+    highlightItem(type);
 
 }
 
@@ -1942,7 +3153,9 @@ async function loadData(code){
     document.getElementById("snackMinus").value = 0;
     document.getElementById("friedMinus").value = 0;
 
-    loadLog(code);
+    updateAllPreviews();
+
+    loadPurchaseSummary(code);
 
 }
 
@@ -2199,9 +3412,13 @@ async function saveData(){
             document.getElementById("snackMinus").value = 0;
             document.getElementById("friedMinus").value = 0;
 
+            updateAllPreviews();
+
             await loadLatest();
 
-            await loadLog(
+            await loadPurchaseChart();
+
+            await loadPurchaseSummary(
                 document.getElementById("code").value
             );
 
@@ -2259,6 +3476,8 @@ function clearForm(){
     document.getElementById("snackMinus").value = 0;
     document.getElementById("friedMinus").value = 0;
 
+    updateAllPreviews();
+
     document.getElementById("codeSelect").value = "";
 
     document.getElementById("codePopupButton").innerText =
@@ -2268,7 +3487,7 @@ function clearForm(){
     `
     <tr>
         <td colspan="5" class="text-center">
-        ยังไม่มีข้อมูล
+        ยังไม่มียอดการซื้อ
         </td>
     </tr>
     `;
@@ -2284,9 +3503,31 @@ async function createDailySheet(){
 
         icon:'question',
 
-        title:'สร้าง Sheet เบิกแต่ละวัน?',
+        title:'สร้าง Sheet เบิกแต่ละวัน',
 
-        text:'ระบบจะสร้าง Sheet ใหม่สำหรับบันทึกการเบิกของวันนี้',
+        input:'text',
+
+        inputLabel:'ชื่อ Sheet',
+
+        inputPlaceholder:'เช่น เบิก 12-05-2026',
+
+        inputAttributes:{
+
+            autocapitalize:'off'
+
+        },
+
+        inputValidator:(value) => {
+
+            if(!value || !value.trim()){
+
+                return 'กรุณากรอกชื่อ Sheet';
+
+            }
+
+            return undefined;
+
+        },
 
         showCancelButton:true,
 
@@ -2297,6 +3538,9 @@ async function createDailySheet(){
     });
 
     if(!confirm.isConfirmed) return;
+
+    const sheetName =
+    confirm.value.trim();
 
     try{
 
@@ -2324,7 +3568,13 @@ async function createDailySheet(){
         });
 
         const res =
-        await fetch(API_URL + "?action=createDailySheet");
+        await fetch(
+
+            API_URL +
+            "?action=createDailySheet&sheetName=" +
+            encodeURIComponent(sheetName)
+
+        );
 
         const text =
         await res.text();
@@ -2360,6 +3610,8 @@ async function createDailySheet(){
 
             });
 
+            await loadSheetInfo();
+
         }else{
 
             Swal.fire({
@@ -2390,7 +3642,599 @@ async function createDailySheet(){
 
 }
 
+/* RESET SHEET */
+
+async function resetSheetColumns(){
+
+    const confirm =
+    await Swal.fire({
+
+        icon:'warning',
+
+        title:'Reset Sheet?',
+
+        input:'text',
+
+        inputLabel:'ชื่อ Sheet ที่ต้องการ Reset',
+
+        inputValue:'PX169',
+
+        inputPlaceholder:'เช่น PX169',
+
+        html:`
+        <div class="text-start">
+            ระบบจะรีเซ็ตเฉพาะคอลัมน์
+            <b>น้ำ, ขนม, ของทอด</b>
+        </div>
+        `,
+
+        inputValidator:(value) => {
+
+            if(!value || !value.trim()){
+
+                return 'กรุณากรอกชื่อ Sheet';
+
+            }
+
+            return undefined;
+
+        },
+
+        showCancelButton:true,
+
+        confirmButtonText:'Reset',
+
+        cancelButtonText:'ยกเลิก',
+
+        confirmButtonColor:'#b91c1c'
+
+    });
+
+    if(!confirm.isConfirmed) return;
+
+    const sheetName =
+    confirm.value.trim();
+
+    try{
+
+        Swal.fire({
+
+            title:'กำลัง Reset Sheet',
+
+            html:`
+
+            <div class="progress mt-3">
+
+                <div
+                class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+                style="width:100%">
+                </div>
+
+            </div>
+
+            `,
+
+            allowOutsideClick:false,
+
+            showConfirmButton:false
+
+        });
+
+        const params =
+        new URLSearchParams({
+
+            action:"resetSheet",
+
+            sheetName:sheetName,
+
+            columns:"water,snack,fried",
+
+            thaiColumns:"น้ำ,ขนม,ของทอด"
+
+        });
+
+        const res =
+        await fetch(
+
+            API_URL +
+            "?" +
+            params.toString()
+
+        );
+
+        const text =
+        await res.text();
+
+        let result;
+
+        try{
+
+            result =
+            JSON.parse(text);
+
+        }catch(parseErr){
+
+            throw new Error(text || "Apps Script ไม่ได้ส่งข้อมูล JSON กลับมา");
+
+        }
+
+        Swal.close();
+
+        if(result.success){
+
+            Swal.fire({
+
+                icon:'success',
+
+                title:'Reset Sheet สำเร็จ',
+
+                timer:1400,
+
+                showConfirmButton:false
+
+            });
+
+            clearForm();
+
+            await loadLatest();
+
+        }else{
+
+            const message =
+            result.message || '';
+
+            if(
+                message === "No Action" ||
+                message.includes("No Action")
+            ){
+
+                await resetSheetColumnsBySave(sheetName);
+
+                return;
+
+            }
+
+            Swal.fire({
+
+                icon:'error',
+
+                title:'Reset Sheet ไม่สำเร็จ',
+
+                text:message
+
+            });
+
+        }
+
+    }catch(err){
+
+        Swal.fire({
+
+            icon:'error',
+
+            title:'Reset Sheet ไม่สำเร็จ',
+
+            text:err.message || 'เชื่อมต่อไม่สำเร็จ'
+
+        });
+
+    }
+
+}
+
+async function resetSheetColumnsBySave(sheetName){
+
+    Swal.fire({
+
+        title:'กำลัง Reset ทุกแถว',
+
+        html:`
+
+        <div class="mb-2" id="resetProgressText">
+            กำลังเตรียมข้อมูล...
+        </div>
+
+        <div class="progress mt-3">
+            <div
+            id="resetProgressBar"
+            class="progress-bar progress-bar-striped progress-bar-animated bg-danger"
+            style="width:0%">
+            </div>
+        </div>
+
+        `,
+
+        allowOutsideClick:false,
+
+        showConfirmButton:false
+
+    });
+
+    const codesRes =
+    await fetch(
+
+        API_URL +
+        "?action=codes&sheetName=" +
+        encodeURIComponent(sheetName)
+
+    );
+
+    const codes =
+    await codesRes.json();
+
+    if(!Array.isArray(codes) || codes.length === 0){
+
+        throw new Error("ไม่พบรหัสใน Sheet " + sheetName);
+
+    }
+
+    for(let i=0;i<codes.length;i++){
+
+        const code =
+        typeof codes[i] === "object"
+        ? codes[i].code
+        : codes[i];
+
+        if(!code) continue;
+
+        const percent =
+        Math.round((i / codes.length) * 100);
+
+        const progressText =
+        document.getElementById("resetProgressText");
+
+        const progressBar =
+        document.getElementById("resetProgressBar");
+
+        if(progressText){
+
+            progressText.innerText =
+            `กำลัง Reset ${i + 1}/${codes.length} (${code})`;
+
+        }
+
+        if(progressBar){
+
+            progressBar.style.width =
+            percent + "%";
+
+        }
+
+        const getRes =
+        await fetch(
+
+            API_URL +
+            "?action=get&sheetName=" +
+            encodeURIComponent(sheetName) +
+            "&code=" +
+            encodeURIComponent(code)
+
+        );
+
+        const item =
+        await getRes.json();
+
+        if(!item || !item.row) continue;
+
+        const params =
+        new URLSearchParams({
+
+            action:"save",
+
+            sheetName:sheetName,
+
+            row:item.row,
+
+            code:code,
+
+            water:0,
+
+            snack:0,
+
+            fried:0
+
+        });
+
+        const saveRes =
+        await fetch(
+
+            API_URL +
+            "?" +
+            params.toString()
+
+        );
+
+        const saveResult =
+        await saveRes.json();
+
+        if(!saveResult.success){
+
+            throw new Error(
+                saveResult.message ||
+                "Reset ไม่สำเร็จที่รหัส " + code
+            );
+
+        }
+
+    }
+
+    const progressBar =
+    document.getElementById("resetProgressBar");
+
+    if(progressBar){
+
+        progressBar.style.width =
+        "100%";
+
+    }
+
+    Swal.fire({
+
+        icon:'success',
+
+        title:'Reset Sheet สำเร็จ',
+
+        text:'รีเซ็ตน้ำ / ขนม / ของทอด ใน Sheet ' + sheetName + ' แล้ว',
+
+        timer:1800,
+
+        showConfirmButton:false
+
+    });
+
+    clearForm();
+
+    await loadLatest();
+
+}
+
 /* LOG */
+
+function renderPurchaseChart(summary){
+
+    const water =
+    Number(summary.water) || 0;
+
+    const snack =
+    Number(summary.snack) || 0;
+
+    const fried =
+    Number(summary.fried) || 0;
+
+    const total =
+    Number(summary.total) || 0;
+
+    const maxValue =
+    Math.max(water, snack, fried, 1);
+
+    document.getElementById("waterSummaryValue").innerText =
+    water;
+
+    document.getElementById("snackSummaryValue").innerText =
+    snack;
+
+    document.getElementById("friedSummaryValue").innerText =
+    fried;
+
+    document.getElementById("summaryTotal").innerText =
+    total.toLocaleString("th-TH") + " บาท";
+
+    document.getElementById("waterSummaryBar").style.width =
+    Math.round((water / maxValue) * 100) + "%";
+
+    document.getElementById("snackSummaryBar").style.width =
+    Math.round((snack / maxValue) * 100) + "%";
+
+    document.getElementById("friedSummaryBar").style.width =
+    Math.round((fried / maxValue) * 100) + "%";
+
+}
+
+async function loadPurchaseChart(){
+
+    try{
+
+        const res =
+        await fetch(API_URL + "?action=summary");
+
+        const data =
+        await res.json();
+
+        if(data && data.success){
+
+            renderPurchaseChart(data);
+
+            return;
+
+        }
+
+        await loadPurchaseChartFallback();
+
+    }catch(err){
+
+        await loadPurchaseChartFallback();
+
+    }
+
+}
+
+async function loadPurchaseChartFallback(){
+
+    try{
+
+        const codes =
+        await fetch(API_URL + "?action=codes")
+        .then(res => res.json());
+
+        const summary = {
+            water:0,
+            snack:0,
+            fried:0,
+            total:0
+        };
+
+        for(const item of codes){
+
+            const itemCode =
+            typeof item === "object"
+            ? item.code
+            : item;
+
+            if(!itemCode) continue;
+
+            const data =
+            await fetch(
+                API_URL +
+                "?action=get&code=" +
+                encodeURIComponent(itemCode)
+            ).then(res => res.json());
+
+            if(!data || data.error) continue;
+
+            summary.water +=
+            Number(data.water) || 0;
+
+            summary.snack +=
+            Number(data.snack) || 0;
+
+            summary.fried +=
+            Number(data.fried) || 0;
+
+            summary.total +=
+            Number(
+                data.round1 ??
+                data["รอบ 1"] ??
+                data.total ??
+                0
+            ) || 0;
+
+        }
+
+        renderPurchaseChart(summary);
+
+    }catch(err){
+
+        renderPurchaseChart({
+            water:0,
+            snack:0,
+            fried:0,
+            total:0
+        });
+
+    }
+
+}
+
+async function loadPurchaseSummary(code=""){
+
+    const table =
+    document.getElementById("logTable");
+
+    table.innerHTML =
+    `
+    <tr>
+        <td colspan="5" class="text-center">
+        กำลังโหลดยอดการซื้อ...
+        </td>
+    </tr>
+    `;
+
+    try{
+
+        const codes =
+        code
+        ? [{ code:code }]
+        : await fetch(API_URL + "?action=codes").then(res => res.json());
+
+        let html = "";
+
+        for(const item of codes){
+
+            const itemCode =
+            typeof item === "object"
+            ? item.code
+            : item;
+
+            if(!itemCode) continue;
+
+            const data =
+            await fetch(
+
+                API_URL +
+                "?action=get&code=" +
+                encodeURIComponent(itemCode)
+
+            ).then(res => res.json());
+
+            if(!data || data.error) continue;
+
+            const water =
+            Number(data.water) || 0;
+
+            const snack =
+            Number(data.snack) || 0;
+
+            const fried =
+            Number(data.fried) || 0;
+
+            const total =
+            Number(
+                data.round1 ??
+                data["รอบ 1"] ??
+                data.total ??
+                0
+            ) || 0;
+
+            if(total === 0 && !code) continue;
+
+            html += `
+
+            <tr>
+                <td data-label="รหัส">
+                    <span class="log-code">${data.code || itemCode}</span>
+                </td>
+                <td data-label="น้ำ">
+                    <span class="log-value">${water}</span>
+                </td>
+                <td data-label="ขนม">
+                    <span class="log-value">${snack}</span>
+                </td>
+                <td data-label="ของทอด">
+                    <span class="log-value">${fried}</span>
+                </td>
+                <td data-label="รวมเงิน">
+                    <span class="log-field">${total} บาท</span>
+                </td>
+            </tr>
+
+            `;
+
+        }
+
+        table.innerHTML =
+        html ||
+        `
+        <tr>
+            <td colspan="5" class="text-center">
+            ยังไม่มียอดการซื้อ
+            </td>
+        </tr>
+        `;
+
+    }catch(err){
+
+        table.innerHTML =
+        `
+        <tr>
+            <td colspan="5" class="text-center text-danger">
+            โหลดยอดการซื้อไม่สำเร็จ
+            </td>
+        </tr>
+        `;
+
+    }
+
+}
 
 async function loadLog(code=""){
 
@@ -2467,18 +4311,18 @@ async function loadLog(code=""){
 
         <tr class="${rowClass}">
 
-        <td>${item.time}</td>
-        <td>
+        <td data-label="เวลา">${item.time}</td>
+        <td data-label="รหัส">
             <span class="log-code">${item.code}</span>
         </td>
-        <td>
+        <td data-label="รายการ">
             <span class="log-field">${fieldName}</span>
             <span class="log-change ${changeClass}">${changeText}</span>
         </td>
-        <td>
+        <td data-label="ค่าเก่า">
             <span class="log-value">${item.old}</span>
         </td>
-        <td>
+        <td data-label="ค่าใหม่">
             <span class="log-value">${item.new}</span>
         </td>
 
