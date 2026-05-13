@@ -919,11 +919,30 @@ body{
 
 }
 
+.purchase-under-items{
+
+    margin:2px 0 18px;
+
+}
+
+.purchase-under-items .log-title{
+
+    margin-top:0;
+
+}
+
+.summary-chart + .log-title,
+.summary-chart + .log-title + .log-table{
+
+    display:none;
+
+}
+
 .summary-chart{
 
     display:grid;
 
-    gap:12px;
+    gap:14px;
 
     margin-bottom:18px;
 
@@ -931,17 +950,44 @@ body{
 
 .summary-chart-total{
 
-    border-radius:18px;
+    position:relative;
 
-    padding:14px;
+    overflow:hidden;
+
+    border-radius:22px;
+
+    padding:18px;
 
     text-align:center;
 
-    background:#0f172a;
+    background:
+    linear-gradient(135deg,#0f172a 0%,#1e3a5f 52%,#0f766e 100%);
 
     color:white;
 
-    box-shadow:0 10px 22px rgba(15,23,42,.14);
+    box-shadow:
+    0 18px 36px rgba(15,23,42,.18),
+    inset 0 1px 0 rgba(255,255,255,.16);
+
+}
+
+.summary-chart-total::after{
+
+    content:"";
+
+    position:absolute;
+
+    right:-45px;
+
+    top:-45px;
+
+    width:130px;
+
+    height:130px;
+
+    border-radius:999px;
+
+    border:24px solid rgba(255,255,255,.11);
 
 }
 
@@ -953,7 +999,7 @@ body{
 
     font-weight:800;
 
-    color:#cbd5e1;
+    color:#dbeafe;
 
 }
 
@@ -963,7 +1009,7 @@ body{
 
     margin-top:4px;
 
-    font-size:28px;
+    font-size:34px;
 
     font-weight:900;
 
@@ -973,7 +1019,7 @@ body{
 
     display:grid;
 
-    gap:10px;
+    gap:12px;
 
 }
 
@@ -981,11 +1027,21 @@ body{
 
     display:grid;
 
-    grid-template-columns:76px 1fr 70px;
+    grid-template-columns:96px 1fr 80px;
 
-    gap:10px;
+    gap:12px;
 
     align-items:center;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:18px;
+
+    padding:12px;
+
+    background:#ffffff;
+
+    box-shadow:0 10px 22px rgba(15,23,42,.06);
 
 }
 
@@ -1000,21 +1056,101 @@ body{
 
 }
 
+.summary-chart-label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+}
+
+.summary-chart-label::before{
+
+    content:"";
+
+    flex:0 0 auto;
+
+    width:14px;
+
+    height:14px;
+
+    border-radius:5px;
+
+    box-shadow:0 4px 10px rgba(15,23,42,.12);
+
+}
+
+.summary-chart-row:nth-child(1) .summary-chart-label::before{
+
+    background:#2563eb;
+
+}
+
+.summary-chart-row:nth-child(2) .summary-chart-label::before{
+
+    background:#ea580c;
+
+}
+
+.summary-chart-row:nth-child(3) .summary-chart-label::before{
+
+    background:#16a34a;
+
+}
+
+.summary-chart-dot{
+
+    width:14px;
+
+    height:14px;
+
+    border-radius:5px;
+
+    box-shadow:0 4px 10px rgba(15,23,42,.12);
+
+}
+
+.summary-chart-dot.water{
+
+    background:#2563eb;
+
+}
+
+.summary-chart-dot.snack{
+
+    background:#ea580c;
+
+}
+
+.summary-chart-dot.fried{
+
+    background:#16a34a;
+
+}
+
 .summary-chart-value{
 
     text-align:right;
+
+    font-size:18px;
 
 }
 
 .summary-chart-track{
 
-    height:14px;
+    position:relative;
+
+    height:18px;
 
     overflow:hidden;
 
     border-radius:999px;
 
-    background:#e5e7eb;
+    background:#edf2f7;
+
+    box-shadow:inset 0 1px 3px rgba(15,23,42,.12);
 
 }
 
@@ -1026,25 +1162,41 @@ body{
 
     border-radius:999px;
 
-    transition:width .35s ease;
+    transition:width .45s ease;
+
+    box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.34),
+    0 8px 16px rgba(15,23,42,.10);
 
 }
 
 .summary-chart-bar.water{
 
-    background:#2563eb;
+    background:linear-gradient(90deg,#38bdf8,#2563eb);
 
 }
 
 .summary-chart-bar.snack{
 
-    background:#ea580c;
+    background:linear-gradient(90deg,#fbbf24,#ea580c);
 
 }
 
 .summary-chart-bar.fried{
 
-    background:#16a34a;
+    background:linear-gradient(90deg,#86efac,#16a34a);
+
+}
+
+.summary-chart-percent{
+
+    color:#64748b;
+
+    font-size:12px;
+
+    font-weight:800;
+
+    text-align:right;
 
 }
 
@@ -2364,6 +2516,58 @@ onclick="resetItem('fried')">
 
 </div>
 
+<div class="purchase-under-items">
+
+<div class="log-title">
+
+<h4>
+เธขเธญเธ”เธเธฒเธฃเธเธทเนเธญ
+</h4>
+
+<span class="log-badge">
+เธชเธฃเธธเธเธเธฒเธ Sheet
+</span>
+
+</div>
+
+<div class="log-table">
+
+<table class="table table-bordered table-hover">
+
+<thead>
+
+<tr>
+
+<th>เธฃเธซเธฑเธช</th>
+<th>เธเนเธณ</th>
+<th>เธเธเธก</th>
+<th>เธเธญเธเธ—เธญเธ”</th>
+<th>เธฃเธงเธกเน€เธเธดเธ</th>
+
+</tr>
+
+</thead>
+
+<tbody id="logTableHidden">
+
+<tr>
+
+<td colspan="5" class="text-center">
+
+เธขเธฑเธเนเธกเนเธกเธตเธเนเธญเธกเธนเธฅ
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
 <div class="action-buttons">
 
 <button
@@ -2404,10 +2608,10 @@ F85 / G85 / H85 / I85
 
 <div class="summary-chart">
 
-<!--<div class="summary-chart-total">
+<div class="summary-chart-total">
 <span>รวมเงินทั้งหมด</span>
 <strong id="summaryTotal">0 บาท</strong>
-</div> -->
+</div>
 
 <div class="summary-chart-bars">
 
@@ -2506,6 +2710,18 @@ let currentSheetName = "กำลังตรวจสอบ...";
 
 let codeList = [];
 
+let purchaseRealtimeTimer = null;
+
+let purchaseRealtimeBusy = false;
+
+let purchaseFastUntil = 0;
+
+const PURCHASE_REALTIME_MS = 5000;
+
+const PURCHASE_REALTIME_FAST_MS = 1500;
+
+const PURCHASE_REALTIME_HIDDEN_MS = 10000;
+
 /* START */
 
 window.onload = () => {
@@ -2513,6 +2729,8 @@ window.onload = () => {
     setupMobileLatest();
 
     setupQuickButtonAnimation();
+
+    setupPurchaseTablePlacementText();
 
     createNumberOptions();
 
@@ -2531,6 +2749,8 @@ window.onload = () => {
     loadPurchaseChart();
 
     loadPurchaseSummary();
+
+    startPurchaseRealtime();
 
 };
 
@@ -2596,6 +2816,74 @@ function toggleLatestBox(){
     latest.classList.contains("is-collapsed")
     ? "แสดง"
     : "ซ่อน";
+
+}
+
+function setupPurchaseTablePlacementText(){
+
+    const box =
+    document.querySelector(".purchase-under-items");
+
+    if(!box) return;
+
+    const title =
+    box.querySelector(".log-title h4");
+
+    const badge =
+    box.querySelector(".log-badge");
+
+    const headers =
+    box.querySelectorAll("thead th");
+
+    document.querySelectorAll('tbody[id="logTable"]').forEach(body => {
+
+        if(!box.contains(body)){
+
+            body.id =
+            "logTableHidden";
+
+        }
+
+    });
+
+    const visibleBody =
+    box.querySelector("tbody");
+
+    if(visibleBody){
+
+        visibleBody.id =
+        "logTable";
+
+    }
+
+    const empty =
+    box.querySelector("tbody td[colspan]");
+
+    if(title) title.textContent =
+    "\u0e22\u0e2d\u0e14\u0e01\u0e32\u0e23\u0e0b\u0e37\u0e49\u0e2d";
+
+    if(badge) badge.textContent =
+    "\u0e2a\u0e23\u0e38\u0e1b\u0e08\u0e32\u0e01 Sheet";
+
+    [
+        "\u0e23\u0e2b\u0e31\u0e2a",
+        "\u0e19\u0e49\u0e33",
+        "\u0e02\u0e19\u0e21",
+        "\u0e02\u0e2d\u0e07\u0e17\u0e2d\u0e14",
+        "\u0e23\u0e27\u0e21\u0e40\u0e07\u0e34\u0e19"
+    ].forEach((text, index) => {
+
+        if(headers[index]){
+
+            headers[index].textContent =
+            text;
+
+        }
+
+    });
+
+    if(empty) empty.textContent =
+    "\u0e22\u0e31\u0e07\u0e44\u0e21\u0e48\u0e21\u0e35\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25";
 
 }
 
@@ -2826,6 +3114,195 @@ function resetItem(type){
     updateItemPreview(type);
 
     highlightItem(type);
+
+}
+
+function getSelectedPurchaseCode(){
+
+    const codeInput =
+    document.getElementById("code");
+
+    return codeInput && codeInput.value
+    ? codeInput.value
+    : "";
+
+}
+
+async function refreshPurchaseRealtime(){
+
+    if(purchaseRealtimeBusy) return;
+
+    purchaseRealtimeBusy = true;
+
+    try{
+
+        await Promise.allSettled([
+
+            loadLatest(),
+
+            loadPurchaseChart(),
+
+            loadPurchaseSummary(
+                getSelectedPurchaseCode(),
+                true
+            )
+
+        ]);
+
+    }catch(err){
+
+        // Realtime refresh should stay quiet; manual actions still show errors.
+
+    }finally{
+
+        purchaseRealtimeBusy = false;
+
+    }
+
+}
+
+function schedulePurchaseRealtime(){
+
+    window.clearTimeout(purchaseRealtimeTimer);
+
+    const isFast =
+    Date.now() < purchaseFastUntil;
+
+    const delay =
+    document.hidden
+    ? PURCHASE_REALTIME_HIDDEN_MS
+    : isFast
+    ? PURCHASE_REALTIME_FAST_MS
+    : PURCHASE_REALTIME_MS;
+
+    purchaseRealtimeTimer =
+    window.setTimeout(async () => {
+
+        await refreshPurchaseRealtime();
+
+        schedulePurchaseRealtime();
+
+    }, delay);
+
+}
+
+function startPurchaseRealtime(){
+
+    if(purchaseRealtimeTimer) return;
+
+    schedulePurchaseRealtime();
+
+    document.addEventListener("visibilitychange", () => {
+
+        if(!document.hidden){
+
+            refreshPurchaseRealtime();
+
+        }
+
+        schedulePurchaseRealtime();
+
+    });
+
+}
+
+function liveUrl(action, params={}){
+
+    const urlParams =
+    new URLSearchParams({
+
+        action:action,
+
+        _ts:Date.now()
+
+    });
+
+    Object.entries(params).forEach(([key, value]) => {
+
+        if(value !== undefined && value !== null && value !== ""){
+
+            urlParams.set(key, value);
+
+        }
+
+    });
+
+    return API_URL + "?" + urlParams.toString();
+
+}
+
+function refreshPurchaseAfterSave(){
+
+    purchaseFastUntil =
+    Date.now() + 12000;
+
+    schedulePurchaseRealtime();
+
+    refreshPurchaseRealtime();
+
+    window.setTimeout(() => {
+
+        refreshPurchaseRealtime();
+
+    }, 700);
+
+    window.setTimeout(() => {
+
+        loadPurchaseChart();
+
+        loadPurchaseSummary("", true);
+
+    }, 1800);
+
+}
+
+function applySavedPurchaseData(result, code){
+
+    if(result && result.summary && result.summary.success){
+
+        renderPurchaseChart(result.summary);
+
+    }
+
+    if(result && Array.isArray(result.purchaseRows)){
+
+        const table =
+        document.getElementById("logTable");
+
+        if(table){
+
+            table.innerHTML =
+            renderPurchaseSummaryRows(result.purchaseRows, "") ||
+            `
+            <tr>
+                <td colspan="5" class="text-center">
+                เธขเธฑเธเนเธกเนเธกเธตเธขเธญเธ”เธเธฒเธฃเธเธทเนเธญ
+                </td>
+            </tr>
+            `;
+
+        }
+
+    }else if(result && result.purchaseItem){
+
+        const table =
+        document.getElementById("logTable");
+
+        if(table){
+
+            table.innerHTML =
+            renderPurchaseSummaryRows([result.purchaseItem], code) ||
+            `
+            <tr>
+                <td colspan="5" class="text-center">
+                เธขเธฑเธเนเธกเนเธกเธตเธขเธญเธ”เธเธฒเธฃเธเธทเนเธญ
+                </td>
+            </tr>
+            `;
+
+        }
+
+    }
 
 }
 
@@ -3383,6 +3860,9 @@ async function saveData(){
 
         if(result.success){
 
+            const savedCode =
+            document.getElementById("code").value;
+
             Swal.fire({
 
                 icon:'success',
@@ -3414,13 +3894,14 @@ async function saveData(){
 
             updateAllPreviews();
 
-            await loadLatest();
-
-            await loadPurchaseChart();
-
-            await loadPurchaseSummary(
-                document.getElementById("code").value
+            applySavedPurchaseData(
+                result,
+                savedCode
             );
+
+            refreshPurchaseAfterSave();
+
+            await loadLatest();
 
             document.getElementById("codeSelect").value = "";
 
@@ -4007,26 +4488,68 @@ function renderPurchaseChart(summary){
     const maxValue =
     Math.max(water, snack, fried, 1);
 
+    const waterPercent =
+    Math.round((water / maxValue) * 100);
+
+    const snackPercent =
+    Math.round((snack / maxValue) * 100);
+
+    const friedPercent =
+    Math.round((fried / maxValue) * 100);
+
     document.getElementById("waterSummaryValue").innerText =
-    water;
+    water.toLocaleString("th-TH");
 
     document.getElementById("snackSummaryValue").innerText =
-    snack;
+    snack.toLocaleString("th-TH");
 
     document.getElementById("friedSummaryValue").innerText =
-    fried;
+    fried.toLocaleString("th-TH");
 
     document.getElementById("summaryTotal").innerText =
     total.toLocaleString("th-TH") + " บาท";
 
     document.getElementById("waterSummaryBar").style.width =
-    Math.round((water / maxValue) * 100) + "%";
+    waterPercent + "%";
 
     document.getElementById("snackSummaryBar").style.width =
-    Math.round((snack / maxValue) * 100) + "%";
+    snackPercent + "%";
 
     document.getElementById("friedSummaryBar").style.width =
-    Math.round((fried / maxValue) * 100) + "%";
+    friedPercent + "%";
+
+    setSummaryPercent("waterSummaryValue", waterPercent);
+
+    setSummaryPercent("snackSummaryValue", snackPercent);
+
+    setSummaryPercent("friedSummaryValue", friedPercent);
+
+}
+
+function setSummaryPercent(valueId, percent){
+
+    const value =
+    document.getElementById(valueId);
+
+    if(!value) return;
+
+    let percentEl =
+    value.parentElement.querySelector(".summary-chart-percent");
+
+    if(!percentEl){
+
+        percentEl =
+        document.createElement("div");
+
+        percentEl.className =
+        "summary-chart-percent";
+
+        value.parentElement.appendChild(percentEl);
+
+    }
+
+    percentEl.innerText =
+    percent + "%";
 
 }
 
@@ -4035,7 +4558,13 @@ async function loadPurchaseChart(){
     try{
 
         const res =
-        await fetch(API_URL + "?action=summary");
+        await fetch(
+
+            liveUrl("summary"),
+
+            { cache:"no-store" }
+
+        );
 
         const data =
         await res.json();
@@ -4125,10 +4654,60 @@ async function loadPurchaseChartFallback(){
 
 }
 
-async function loadPurchaseSummary(code=""){
+function renderPurchaseSummaryRows(rows, code=""){
+
+    let html = "";
+
+    rows.forEach(data => {
+
+        const water =
+        Number(data.water) || 0;
+
+        const snack =
+        Number(data.snack) || 0;
+
+        const fried =
+        Number(data.fried) || 0;
+
+        const total =
+        Number(data.round1 ?? data.total ?? 0) || 0;
+
+        if(total === 0 && !code) return;
+
+        html += `
+
+        <tr>
+            <td data-label="รหัส">
+                <span class="log-code">${data.code || ""}</span>
+            </td>
+            <td data-label="น้ำ">
+                <span class="log-value">${water}</span>
+            </td>
+            <td data-label="ขนม">
+                <span class="log-value">${snack}</span>
+            </td>
+            <td data-label="ของทอด">
+                <span class="log-value">${fried}</span>
+            </td>
+            <td data-label="รวมเงิน">
+                <span class="log-field">${total} บาท</span>
+            </td>
+        </tr>
+
+        `;
+
+    });
+
+    return html;
+
+}
+
+async function loadPurchaseSummary(code="", silent=false){
 
     const table =
     document.getElementById("logTable");
+
+    if(!silent){
 
     table.innerHTML =
     `
@@ -4139,7 +4718,45 @@ async function loadPurchaseSummary(code=""){
     </tr>
     `;
 
+    }
+
     try{
+
+        try{
+
+            const fastUrl =
+            liveUrl("purchaseSummary", { code:code });
+
+            const fastRows =
+            await fetch(
+
+                fastUrl,
+
+                { cache:"no-store" }
+
+            ).then(res => res.json());
+
+            if(Array.isArray(fastRows)){
+
+                table.innerHTML =
+                renderPurchaseSummaryRows(fastRows, code) ||
+                `
+                <tr>
+                    <td colspan="5" class="text-center">
+                    ยังไม่มียอดการซื้อ
+                    </td>
+                </tr>
+                `;
+
+                return;
+
+            }
+
+        }catch(fastErr){
+
+            // Older Apps Script deployments will fall back to per-code reads.
+
+        }
 
         const codes =
         code
@@ -4222,6 +4839,8 @@ async function loadPurchaseSummary(code=""){
         `;
 
     }catch(err){
+
+        if(silent) return;
 
         table.innerHTML =
         `
